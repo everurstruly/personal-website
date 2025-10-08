@@ -4,7 +4,12 @@
     "strictNullChecks": true,
     "baseUrl": ".",
     "paths": {
-      "@*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@lib/*": ["./src/lib/*"],
+      "@pages/*": ["./src/pages/*"],
+      "@content/*": ["./src/content/*"],
+      "@features/*": ["./src/features/*"],
+      "@components/*": ["./src/lib/components/*"]
     }
   }
 }
