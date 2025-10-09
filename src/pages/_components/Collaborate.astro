@@ -1,0 +1,58 @@
+---
+import { Accordion } from "@components/Accordion";
+---
+
+<section
+  class="pt-16 pb-16 lg:flex lg:items-start lg:gap-x-20"
+  id="collaborate"
+>
+  <header
+    class="lg:max-w-xs mb-8 lg:mb-8 flex items-center gap-x-4 justify-between lg:flex-col lg:items-start lg:gap-y-2 lg:sticky lg:top-28 lg:h-full lg:shrink-0"
+  >
+    <h2 class="text-lg lg:text-3xl text-balance text-zinc-900">
+      Lets Create Something Amazing Together
+    </h2>
+    <button class="text-sm underline text-blue-600 py-2"> Email </button>
+  </header>
+
+  <div class="grow">
+    <Accordion
+      client:idle
+      data={[
+        {
+          title: "What services do you offer?",
+          content:
+            "I offer a range of services including web development, mobile app development, UI/UX design, and consulting. I specialize in creating responsive and user-friendly applications tailored to your needs.",
+        },
+        {
+          title: "What is your development process?",
+          content:
+            "My development process typically involves initial consultation, requirement gathering, design and prototyping, development, testing, and deployment. I ensure to keep you involved at every stage to ensure the final product meets your expectations.",
+        },
+        {
+          title: "How do you handle project timelines?",
+          content:
+            "I believe in transparent communication and realistic timelines. After understanding the project scope, I provide a detailed timeline and keep you updated on progress regularly. I also build in buffer time for unforeseen challenges.",
+        },
+        {
+          title: "What technologies do you specialize in?",
+          content:
+            "I specialize in a variety of technologies including JavaScript, React, Node.js, Python, and more. I stay updated with the latest trends and tools to ensure that I can provide the best solutions for your projects.",
+        },
+        {
+          title: "How can I get started?",
+          content:
+            "Getting started is easy! You can reach out to me via email or through my contact form on the website. We can schedule a consultation to discuss your project requirements and how I can help bring your vision to life.",
+        },
+      ]}
+    />
+
+    <!-- {
+      [1, 2, 3, 4].map(() => (
+        <article class="w-full lg:max-w-lg flex flex-col grow">
+          
+        </article>
+      ))
+    } -->
+  </div>
+</section>

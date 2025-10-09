@@ -1,0 +1,11 @@
+---
+type Props = {
+  class?: string;
+};
+
+const props = Astro.props;
+---
+
+<main class={`bg-zinc-50 dark:bg-zinc-900.. ${props.class}`}>
+  <slot />
+</main>

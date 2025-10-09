@@ -91,57 +91,30 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 </script>
 
 <script is:inline>
-  function init() {
-    preloadTheme();
-    onScroll();
-    animate();
+  // import {
+  //   toggleTheme,
+  //   preloadTheme,
+  // } from "@pages/_components/ThemeToggler.astro";
 
-    const backToTop = document.getElementById("back-to-top");
-    backToTop?.addEventListener("click", (event) => scrollToTop(event));
-
-    const backToPrev = document.getElementById("back-to-prev");
-    backToPrev?.addEventListener("click", () => window.history.back());
-
-    const lightThemeButton = document.getElementById("light-theme-button");
-    lightThemeButton?.addEventListener("click", () => {
-      localStorage.setItem("theme", "light");
-      toggleTheme(false);
-    });
-
-    const darkThemeButton = document.getElementById("dark-theme-button");
-    darkThemeButton?.addEventListener("click", () => {
-      localStorage.setItem("theme", "dark");
-      toggleTheme(true);
-    });
-
-    const systemThemeButton = document.getElementById("system-theme-button");
-    systemThemeButton?.addEventListener("click", () => {
-      localStorage.setItem("theme", "system");
-      toggleTheme(window.matchMedia("(prefers-color-scheme: dark)").matches);
-    });
-
-    window
-      .matchMedia("(prefers-color-scheme: dark)")
-      .addEventListener("change", (event) => {
-        if (localStorage.theme === "system" || !localStorage.theme) {
-          toggleTheme(event.matches);
-        }
-      });
-
-    document.addEventListener("scroll", onScroll);
-  }
-
-  function animate() {
+  function doRevealAnimation() {
     const animateElements = document.querySelectorAll(".animate");
+    const revealElementsViaOpacity =
+      document.querySelectorAll(".reveal-opacity");
 
     animateElements.forEach((element, index) => {
       setTimeout(() => {
         element.classList.add("show");
-      }, index * 150);
+      }, index * 100);
+    });
+
+    revealElementsViaOpacity.forEach((element, index) => {
+      setTimeout(() => {
+        element.classList.add("show");
+      }, index * 100);
     });
   }
 
-  function onScroll() {
+  function notifyOnScroll() {
     if (window.scrollY > 0) {
       document.documentElement.classList.add("scrolled");
     } else {
@@ -157,45 +130,29 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     });
   }
 
-  function toggleTheme(dark) {
-    const css = document.createElement("style");
+  function init() {
+    // preloadTheme();
+    notifyOnScroll();
+    doRevealAnimation();
 
-    css.appendChild(
-      document.createTextNode(
-        `* {
-             -webkit-transition: none !important;
-             -moz-transition: none !important;
-             -o-transition: none !important;
-             -ms-transition: none !important;
-             transition: none !important;
-          }
-        `
-      )
-    );
+    const backToTop = document.getElementById("back-to-top");
+    backToTop?.addEventListener("click", (event) => scrollToTop(event));
 
-    document.head.appendChild(css);
+    const backToPrev = document.getElementById("back-to-prev");
+    backToPrev?.addEventListener("click", () => window.history.back());
 
-    if (dark) {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
+    // window
+    //   .matchMedia("(prefers-color-scheme: dark)")
+    //   .addEventListener("change", (event) => {
+    //     if (localStorage.theme === "system" || !localStorage.theme) {
+    //       toggleTheme(event.matches);
+    //     }
+    //   });
 
-    window.getComputedStyle(css).opacity;
-    document.head.removeChild(css);
-  }
-
-  function preloadTheme() {
-    const userTheme = localStorage.theme;
-
-    if (userTheme === "light" || userTheme === "dark") {
-      toggleTheme(userTheme === "dark");
-    } else {
-      toggleTheme(window.matchMedia("(prefers-color-scheme: dark)").matches);
-    }
+    document.addEventListener("scroll", notifyOnScroll);
   }
 
   document.addEventListener("DOMContentLoaded", () => init());
   document.addEventListener("astro:after-swap", () => init());
-  preloadTheme();
+  // preloadTheme();
 </script>

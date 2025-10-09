@@ -1,0 +1,79 @@
+---
+import { Github, Linkedin, Mail } from "lucide-astro";
+import { website, socialLinks } from "../seo";
+
+type Props = {
+  class?: string;
+};
+
+const props = Astro.props;
+---
+
+<section
+  id="introduction"
+  class={`border-b bg-zinc-100 text-center pt-14 pb-4 ${props.class}`}
+>
+  <div class="flex flex-col items-center text-center reveal-opacity">
+    <div class="flex flex-col items-center gap-y-4 mb-2 px-4">
+      <img
+        src="/patrick.webp"
+        alt=""
+        width="120"
+        height="120"
+        class="rounded-2xl border bg-zinc-100"
+      />
+
+      <div class="flex gap-x-6 items-center">
+        {
+          [
+            { Icon: Mail, href: `https://mailto:${website.email}` },
+            { Icon: Github, href: socialLinks.github.href },
+            { Icon: Linkedin, href: socialLinks.linkedin.href },
+          ].map((item) => {
+            return (
+              <a
+                class="size-8 rounded-lg grid place-content-center border__ border-b__ border-b-neutral-700 rounded-b-none text-xs"
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                title={item.href.replace("https://", "").split(".")[0]}
+              >
+                <item.Icon class="size-4" />
+              </a>
+            );
+          })
+        }
+      </div>
+
+      <h1 class="text-2xl sm:text-3xl font-bold uppercase text-black-900">
+        Oghenetefa Okotete
+      </h1>
+    </div>
+
+    <nav class="py-2.5 w-full flex-wrap">
+      <ul
+        class="flex flex-wrap justify-center gap-x-3 gap-y-1 text-sm text-black-600"
+      >
+        {
+          [
+            { label: "Experience", url: "/#experiences" },
+            { label: "Highlights", url: "/#highlights" },
+            // { label: "Hire Top Talent", url: "/#services" },
+            { label: "Work with Me", url: "/#collaborate" },
+          ].map((item) => {
+            return (
+              <li>
+                <a
+                  href={item.url}
+                  class="block underline px-2.5 py-1.5 hover:text-blue-600"
+                >
+                  {item.label}
+                </a>
+              </li>
+            );
+          })
+        }
+      </ul>
+    </nav>
+  </div>
+</section>
