@@ -1,5 +1,6 @@
 ---
-
+import { Github, Linkedin, Mail } from "lucide-astro";
+import { socialLinks, website } from "../seo";
 ---
 
 <section id="summary" class="text-center pt-20 pb-10">
@@ -8,10 +9,32 @@
   </h2> -->
 
   <p
-    class="text-lg sm:text-xl text-balance lg:text-3xl max-w-[42ch] mx-auto text-black-900"
+    class="text-lg sm:text-xl text-balance lg:text-3xl max-w-[42ch] mx-auto text-black-900 mb-4"
   >
     <slot />
   </p>
+
+  <div class="flex gap-x-6 items-center justify-center">
+    {
+      [
+        { Icon: Mail, href: `https://mailto:${website.email}` },
+        { Icon: Github, href: socialLinks.github.href },
+        { Icon: Linkedin, href: socialLinks.linkedin.href },
+      ].map((item) => {
+        return (
+          <a
+            class="size-10 rounded-lg grid place-content-center text-xs"
+            href={item.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            title={item.href.replace("https://", "").split(".")[0]}
+          >
+            <item.Icon class="size-5 stroke-zinc-600" />
+          </a>
+        );
+      })
+    }
+  </div>
 
   <button
     class="mt-4 px-4 py-2 text-base text-blue-600 underline hover:text-blue-400 transition"
