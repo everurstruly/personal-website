@@ -1,5 +1,6 @@
 ---
 import { Github, Linkedin, Mail } from "lucide-astro";
+import { website, socialLinks } from "../seo";
 
 type Props = {
   class?: string;
@@ -35,17 +36,14 @@ const props = Astro.props;
     </nav>
 
     <div class="px-8 flex gap-4 text-sm reveal-opacity">
-      <a
-        class="px-1.5 py-3 hover:underline"
-        href="https://twitter.com/yourusername"><Mail /></a
+      <a class="px-1.5 py-3 hover:underline" href=`mailto:${website.email}`
+        ><Mail /></a
       >
-      <a
-        class="px-1.5 py-3 hover:underline"
-        href="https://github.com/yourusername"><Github /></a
+      <a class="px-1.5 py-3 hover:underline" href={socialLinks.github.href}
+        ><Github /></a
       >
-      <a
-        class="px-1.5 py-3 hover:underline"
-        href="https://linkedin.com/in/yourusername"><Linkedin /></a
+      <a class="px-1.5 py-3 hover:underline" href={socialLinks.linkedin.href}
+        ><Linkedin /></a
       >
     </div>
   </div>
