@@ -105,13 +105,13 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     animateElements.forEach((element, index) => {
       setTimeout(() => {
         element.classList.add("show");
-      }, index * 100);
+      }, index * 50);
     });
 
     revealElementsViaOpacity.forEach((element, index) => {
       setTimeout(() => {
         element.classList.add("show");
-      }, index * 100);
+      }, index * 25);
     });
   }
 
