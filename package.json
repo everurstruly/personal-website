@@ -1,7 +1,26 @@
 {
-  "name": "astro-nano",
+  "name": "oghenetefa-personal-website",
   "type": "module",
   "version": "1.0.0",
+  "description": "Personal portfolio and resume website for Oghenetefa.",
+  "author": "Oghenetefa <oghenetefa@gmail.com>",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/oghenetefa/personal-website.git"
+  },
+  "bugs": {
+    "url": "https://github.com/oghenetefa/personal-website/issues"
+  },
+  "keywords": [
+    "portfolio",
+    "resume",
+    "oghenetega",
+    "oghenetefa",
+    "oghenetefa okotete",
+    "everurstruly",
+    "personal-website"
+  ],
   "scripts": {
     "dev": "astro dev",
     "dev:network": "astro dev --host",
