@@ -4,42 +4,58 @@ const highlights = [
     id: "tournament",
     date: "2025",
     title: "Tournament Administration & Management Software",
-    description: "THis is suppose to be some inteeresting description",
-    tech: ["PWA", "React", "Nest.js"],
+    description:
+      "App suite for tournament scheduling, communication, and mobilization.",
+    tech: ["PWA", "React.js", "Nest.js", "Next.js", "TailwindCSS"],
     tags: ["Full Stack"],
     demoUrl: "renna.netlify.app",
-    detailsUrl: "github.com/everurstruly",
+    detailsUrl: "https://github.com/everurstruly/tournament-management-system",
   },
   {
     id: "travel",
     date: "2025",
     title: "Travel Experience Booking Platform",
-    description: "THis is suppose to be some inteeresting description",
-    tech: ["PWA", "React", "Nest.js"],
+    description:
+      "An online marketplace for booking curated tours and activities worldwide, for relaxation and adventure.",
+    tech: ["Next.js", "Nest.js", "ShadcnUI", "PostgreSQL"],
     tags: ["Full Stack"],
-    demoUrl: "#",
-    detailsUrl: "github.com/everurstruly",
+    // demoUrl: "github.com/everurstruly",
+    detailsUrl:
+      "https://github.com/everurstruly/travel-experiences-marketplace",
   },
   {
     id: "fintech",
     date: "2025",
     title: "Offramping Fintech Platform",
-    description: "THis is suppose to be some inteeresting description",
-    tech: ["PWA", "React", "Nest.js"],
+    description:
+      "A fintech platform enabling converting digital assets to fiat currency.",
+    tech: ["Next.js", "API Development", "PWA", "BaaS"],
     tags: ["Full Stack"],
     demoUrl: "rmlpay.vercel.app",
-    detailsUrl: "github.com/everurstruly",
+    detailsUrl: "https://github.com/everurstruly",
   },
   {
     id: "static",
     date: "2025",
-    title: "Brochure/Marketing Website",
-    description: "THis is suppose to be some inteeresting description",
-    tech: ["Astro", "React", "Nest.js"],
+    title: "Word Guessing Puzzle Game",
+    description:
+      "A clone of a once-famous engaging game where players try to guess a hidden five-letter word within six attempts.",
+    tech: ["Javascript", "DOM Manipulation", "Responsive CSS", "HTML5"],
     tags: ["Front End"],
-    demoUrl: "#",
-    detailsUrl: "github.com/everurstruly",
+    demoUrl: "https://everurstruly.github.io/The-New-York-Times-Wordle-Clone/",
+    detailsUrl: "github.com/everurstruly/The-New-York-Times-Wordle-Clone",
   },
+  // {
+  //   id: "static",
+  //   date: "2025",
+  //   title: "Brochure/Marketing Website",
+  //   description:
+  //     "A static website showcasing the features and benefits of a business/person product or service.",
+  //   tech: ["Astro", "React", "Nest.js"],
+  //   tags: ["Front End"],
+  //   demoUrl: "#",
+  //   detailsUrl: "github.com/everurstruly",
+  // },
 ];
 ---
 
@@ -64,40 +80,47 @@ const highlights = [
           />
 
           <div class="flex flex-col p-1">
-            <div class="flex items-end justify-between py-2">
+            <div class="flex items-start gap-x-6 justify-between py-2">
               <h4 class="text-base lg:text-lg font-medium">{project.title}</h4>
-
               <span class="text-sm">{project.date}</span>
             </div>
 
             <p class="text-sm lg:text-base text-black-600">
-              {project.description}. Built with:{" "}
-              {project.tech.map((tag, index) => {
+              {project.description} <span class="font-semibold">In build:</span>{" "}
+              {project.tech.map((tag, index, arr) => {
                 const prefix = index === 0 ? "" : ", ";
+                const sufix = index === arr.length - 1 ? "." : "";
+
                 return (
-                  <span class="text-stone-600">
+                  <>
                     {prefix}
                     {tag}
-                  </span>
+                    {sufix}
+                  </>
                 );
               })}
-              .
             </p>
 
             <div class="flex items-center flex-wrap gap-x-4 gap-y-2 pt-2">
-              <a
-                href={project.demoUrl}
-                class="text-sm text-blue-600 hover:underline"
-              >
-                Live Demo
-              </a>{" "}
-              <span class="text-xs">//</span>{" "}
-              <a
-                href={project.detailsUrl}
-                class="text-sm text-blue-600 hover:underline"
-              >
-                More Details
-              </a>
+              {project.demoUrl && (
+                <a
+                  href={project.demoUrl}
+                  class="text-sm text-blue-600 hover:underline"
+                >
+                  Live Demo
+                </a>
+              )}{" "}
+              {project.detailsUrl && project.demoUrl && (
+                <span class="text-xs">//</span>
+              )}
+              {project.detailsUrl && (
+                <a
+                  href={project.detailsUrl}
+                  class="text-sm text-blue-600 hover:underline"
+                >
+                  More Details
+                </a>
+              )}
             </div>
           </div>
         </article>
