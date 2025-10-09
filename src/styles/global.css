@@ -11,15 +11,25 @@ body {
 }
 
 html {
+  --pageTexturedBackgroundImageUrlOnLightMode: url("/bg-grain-texture-on-light-canvas.png");
+  --pageTexturedBackgroundImageUrlOnDarkMode: url("/bg-grain-texture-on-dark-canvas.png");
+
   color-scheme: light;
   overflow-y: scroll;
   smooth-scroll: auto;
   scroll-behavior: smooth;
+
+  --pageTexturedBackgroundImageUrl: var(
+    --pageTexturedBackgroundImageUrlOnLightMode
+  );
 }
 
-/* html.dark {
+html.dark {
   color-scheme: dark;
-} */
+  --pageTexturedBackgroundImageUrl: var(
+    --pageTexturedBackgroundImageUrlOnDarkMode
+  );
+}
 
 html #back-to-top {
   @apply opacity-0 pointer-events-none;
@@ -50,6 +60,13 @@ body {
     @apply text-black dark:text-white;
     @apply decoration-black/25 dark:decoration-white/50;
   }
+}
+
+.page-section-textured-bg,
+/* :where(main),
+:where(main > section) { */ {
+  @apply bg-white dark:bg-zinc-900;
+  background-image: var(--pageTexturedBackgroundImageUrl);
 }
 
 .reveal-opacity {
