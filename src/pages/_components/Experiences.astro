@@ -33,12 +33,12 @@ const experiences = [
 
 <section
   id="experiences"
-  class="pt-16 pb-20 lg:flex lg:items-start lg:gap-x-32"
+  class="pt-16 pb-20 lg:flex lg:items-start lg:gap-x-20"
 >
   <header
     class="mb-8 flex items-center gap-x-4 justify-between lg:flex-col lg:items-start lg:gap-y-1 lg:sticky lg:top-28 lg:h-full"
   >
-    <h2 class="text-base lg:text-xl font-bold uppercase text-zinc-800">
+    <h2 class="text-base lg:text-xl font-semibold uppercase text-zinc-800">
       Work Experiences
     </h2>
 
@@ -47,40 +47,40 @@ const experiences = [
     </button>
   </header>
 
-  <div class="lg:ms-auto flex flex-col gap-y-32 lg:gap-y-20">
+  <div class="lg:ms-auto flex flex-col gap-y-20 lg:gap-y-20">
     {
-      [1, 2, 3, 4].map(() => (
+      experiences.map((work) => (
         <article class="w-full lg:max-w-lg flex flex-col grow">
           <header class="mb-2">
-            <span class="text-xs mb-6 capitalize">Nov 2023 — Nov 2024</span>
+            <span class="text-xs mb-6 capitalize">
+              {work.date[0]} — {work.date[1]}
+            </span>
 
-            <h3 class="text-base lg:text-xl font-medium">
-              <span>Software Engineer</span> at <a href="#">Company</a>
-            </h3>
+            <h4 class="text-base font-medium lg:text-lg text-nowrap">
+              <span>{work.role}</span> at <a href="#">{work.business}</a>
+            </h4>
           </header>
 
-          <p class="text-sm lg:text-base text-black-600 py-1">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti,
-            suscipit eius. Veniam totam quod minima voluptate, voluptas iure
-            asperiores, quas, nostrum facere sint suscipit ipsum aperiam minus
-            consequuntur adipisci libero?
-          </p>
+          <p class="text-sm lg:text-base py-1">{work.contribution}</p>
 
           <div class="flex flex-wrap gap-x-6 gap-y-4 py-2 mb-2">
-            <a href="#" class="text-sm text-blue-600 hover:underline">
-              Screenshots
-            </a>
-
-            <a href="#" class="text-sm text-blue-600 hover:underline">
-              Live App
-            </a>
+            {work.attachments.map((attachment) => {
+              return (
+                <a
+                  href={attachment.url}
+                  class="text-sm text-blue-600 hover:underline"
+                >
+                  {attachment.label}
+                </a>
+              );
+            })}
           </div>
 
           <ul class="text-sm text-black-600 font-medium py-1 flex flex-wrap gap-6">
-            {["Astro", "Tailwind CSS", "Typescript"].map((tag) => {
+            {work.tech.map((tech) => {
               return (
                 <li class="text-stone-600 py-1 px-2__ rounded-lg bg-zinc-100..">
-                  {tag}
+                  {tech}
                 </li>
               );
             })}

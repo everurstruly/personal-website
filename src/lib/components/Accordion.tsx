@@ -18,10 +18,12 @@ export function Accordion({ data }: Props) {
       {data.map((item, index) => {
         return (
           <AccordionItem key={item.content} value={`item-${index.toFixed()}`}>
-            <AccordionTrigger className="text-base lg:text-lg">
+            <AccordionTrigger className="text-base">
               {item.title}
             </AccordionTrigger>
-            <AccordionContent>{item.content}</AccordionContent>
+            <AccordionContent className="lg:text-base">
+              {item.content}
+            </AccordionContent>
           </AccordionItem>
         );
       })}
