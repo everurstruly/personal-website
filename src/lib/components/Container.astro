@@ -1,7 +1,11 @@
 ---
+type Props = {
+  class?: string;
+};
 
+const props = Astro.props;
 ---
 
-<div class="mx-auto max-w-screen-sm px-5">
+<div class={`mx-auto lg:max-w-5xl px-5 ${props.class}`}>
   <slot />
 </div>
