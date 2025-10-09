@@ -1,6 +1,6 @@
 ---
 import { getCollection } from "astro:content";
-import PageLayout from "@pages/_Layout.astro";
+import RootLayout from "@pages/_RootLayout.astro";
 import Container from "@components/Container.astro";
 import FormattedDate from "@components/FormattedDate.astro";
 import { readingTime } from "@lib/utils";
@@ -23,7 +23,7 @@ const post = Astro.props;
 const { Content } = await render(post);
 ---
 
-<PageLayout title={post.data.title} description={post.data.description}>
+<RootLayout title={post.data.title} description={post.data.description}>
   <Container>
     <div class="animate">
       <BackToPrev href="/blog"> Back to blog </BackToPrev>
@@ -46,4 +46,4 @@ const { Content } = await render(post);
       <Content />
     </article>
   </Container>
-</PageLayout>
+</RootLayout>

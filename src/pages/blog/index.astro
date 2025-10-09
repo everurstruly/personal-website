@@ -1,6 +1,6 @@
 ---
 import { type CollectionEntry, getCollection } from "astro:content";
-import Layout from "@pages/_Layout.astro";
+import RootLayout from "@pages/_RootLayout.astro";
 import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
 import Container from "@components/Container.astro";
@@ -26,7 +26,7 @@ const posts = (await getCollection("blog"))
 const years = Object.keys(posts).sort((a, b) => parseInt(b) - parseInt(a));
 ---
 
-<Layout
+<RootLayout
   title={"Blog"}
   description={"This is the blog page of Oghenetefa Okotete, where I share my thoughts and insights on various topics."}
 >
@@ -59,4 +59,4 @@ const years = Object.keys(posts).sort((a, b) => parseInt(b) - parseInt(a));
     </Container>
   </main>
   <Footer />
-</Layout>
+</RootLayout>
