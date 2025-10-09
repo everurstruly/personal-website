@@ -1,30 +1,34 @@
 ---
 import RootLayout from "@pages/_RootLayout.astro";
-import MyPageLayout from "@pages/_components/Layout.astro";
 import Summary from "@pages/_components/Summary.astro";
 import Highlights from "@pages/_components/Highlights.astro";
 import Collaborate from "@pages/_components/Collaborate.astro";
 import Footnote from "@pages/_components/Footnote.astro";
 import Experiences from "@pages/_components/Experiences.astro";
 import MainContainer from "@pages/_components/MainContainer.astro";
+import Sidebar from "@pages/_components/Sidebar.astro";
+import Main from "@pages/_components/Main.astro";
+import Introduction from "@pages/_components/Introduction.astro";
 ---
 
 <RootLayout
   title={"Home"}
   description={"This is the personal website of Oghenetefa Okotete, where I share my projects, blog posts, and more."}
 >
-  <MyPageLayout>
-    <MainContainer class="animate">
-      <Summary>
-        Hii! I'm Oghenetefa, a passionate Front-end developer with 3+ years of
-        experience building full-stack web applications across modern JavaScript
-        frameworks and backend technologies to deliver effective, user-focused
-        products.
-      </Summary>
-      <Highlights />
-      <Experiences />
-      <Collaborate />
-      <Footnote />
-    </MainContainer>
-  </MyPageLayout>
+  <div class="lg:grid lg:grid-cols-[22vw_1fr] lg:relative">
+    <Sidebar
+      class="hidden lg:block border-r border-r-zinc-300 border-dashed h-screen sticky top-0"
+    />
+
+    <Main>
+      <Introduction class="lg:hidden" />
+      <MainContainer class="animate">
+        <Summary />
+        <Highlights />
+        <Experiences />
+        <Collaborate />
+        <Footnote />
+      </MainContainer>
+    </Main>
+  </div>
 </RootLayout>
