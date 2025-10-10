@@ -5,7 +5,7 @@ import Footer from "@components/Footer.astro";
 import Container from "@components/Container.astro";
 import ArrowCard from "@components/ArrowCard.astro";
 import Link from "@components/Link.astro";
-import { website, socials } from "@pages/seo";
+import { website, socialLinks } from "@pages/seo";
 import { getCollection } from "astro:content";
 import { dateRange } from "@lib/utils";
 
@@ -180,7 +180,7 @@ const experiences = [
 
           <ul class="flex flex-wrap gap-2">
             {
-              socials.map((social) => (
+              socialLinks.map((social) => (
                 <li class="flex gap-x-2 text-nowrap">
                   <Link
                     href={social.href}
