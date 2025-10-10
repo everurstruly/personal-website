@@ -1,12 +1,19 @@
 ---
-import { Github, Linkedin, Mail } from "lucide-astro";
+import { Button } from "@lib/components/ui/button";
+import {
+  ChevronRight,
+  ExternalLink,
+  Github,
+  Linkedin,
+  Mail,
+} from "lucide-astro";
 import { socialLinks, website } from "../seo";
 ---
 
 <section id="summary" class="pt-14 pb-10">
   <div class="max-w-fit sm:max-w-none sm:mx-auto">
     <p
-      class="w-full max-w-[46ch] lg:mx-auto text-lg sm:text-xl sm:text-center lg:text-3xl text-black-900 mb-4 !leading-[1.54]"
+      class="w-full max-w-[46ch] lg:mx-auto text-lg sm:text-xl sm:text-center lg:text-2xl text-black-900 mb-4 !leading-[1.54]"
     >
       Hii! I'm Tefa, a passionate Front-end developer with 3+ years of
       experience building full-stack web applications across modern JavaScript
@@ -36,10 +43,12 @@ import { socialLinks, website } from "../seo";
       }
     </div>
 
-    <button
-      class="block sm:text-center sm:mx-auto mt-4 py-2 text-base text-blue-600 hover:underline transition"
+    <Button
+      variant="link"
+      className="px-0 flex mt-4 text-base sm:mx-auto text-blue-600"
     >
       Read more about me
-    </button>
+      <ExternalLink />
+    </Button>
   </div>
 </section>
