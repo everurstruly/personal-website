@@ -1,6 +1,7 @@
 ---
 import { Github, Linkedin, Mail } from "lucide-astro";
 import { website, socialLinks } from "../seo";
+import { desktopNavMenuList } from "../index.astro";
 
 type Props = {
   class?: string;
@@ -11,19 +12,43 @@ const props = Astro.props;
 
 <aside class={props.class}>
   <div class="*:first:pt-10 *:last:pb-10 flex flex-col h-full overflow-y-auto">
-    <div class="px-8">
-      <figure class="mb-4">
-        <img
-          src="/patrick.webp"
-          alt=""
-          width="60"
-          height="60"
-          class="rounded-xl border object-cover"
-        />
-      </figure>
+    <!-- <div
+      class="px-8 flex gap-x-2 hover:rotate-90 transition-transform duration-500"
+    >
+      <img
+        src="/headshot-rebel.jpg"
+        alt=""
+        width="80"
+        height="40"
+        class="object-cover"
+      />
 
-      <h2 class="text-xl font-medium">Oghenetefa Okotete</h2>
-      <h5 class="text-base ps-1">Full Stack Developer</h5>
+      <div class="text-sideways">
+        <h3 class="text-xl font-medium mb-0">Oghenetefa Okotete</h3>
+        <span class="text-sm">Software Engineer</span>
+      </div>
+    </div> -->
+
+    <div class="px-8 flex flex-col gap-y-2">
+      <!-- <img
+        src="/headshot-rebel.jpg"
+        alt=""
+        width="80"
+        height="40"
+        class="h-20 overflow-hidden object-contain bg-repeat w-full"
+      /> -->
+
+      <div
+        class="tile-grid w-full h-20 bg-zinc-50"
+        role="img"
+        aria-label="tiled headshot"
+      >
+      </div>
+
+      <div>
+        <h3 class="text-xl font-medium mb-0">Oghenetefa Okotete</h3>
+        <span class="text-sm">Software Engineer</span>
+      </div>
     </div>
 
     <nav class="px-8 mt-auto flex flex-col gap-1 text-lg pt-20 pb-10">
@@ -49,3 +74,57 @@ const props = Astro.props;
     </div>
   </div>
 </aside>
+
+<style>
+  .text-sideways {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+  }
+
+  .text-sideways.bottom-rtl {
+    writing-mode: vertical-rl;
+  }
+  .text-sideways.bottom-ltr {
+    writing-mode: vertical-lr;
+  }
+
+  /* Option A — quick: gradient + image (works, but background-image swap doesn't smoothly crossfade) */
+  .tile-grid {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+      url("/headshot-rebel.jpg");
+    background-repeat: repeat;
+    background-position: center;
+    background-size: 40px 40px;
+    transition: background-size 0.5s ease-in-out;
+  }
+  .tile-grid:hover {
+    background-size: 120px 120px;
+  }
+
+  /* Option B — recommended: use a pseudo-element overlay and transition its opacity */
+  .tile-grid {
+    position: relative;
+    background-image: url("/headshot-rebel.jpg");
+    background-repeat: repeat;
+    background-position: center;
+    background-size: 40px 40px;
+    overflow: hidden;
+    transition: background-size 0.5s ease-in-out;
+  }
+  .tile-grid::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5); /* tint color */
+    pointer-events: none;
+    transition: opacity 0.35s ease;
+    opacity: 1; /* tinted by default */
+  }
+  .tile-grid:hover {
+    background-size: 120px 120px;
+  }
+  .tile-grid:hover::before {
+    opacity: 0; /* fade tint away on hover; fades back when mouse leaves */
+  }
+</style>
