@@ -1,0 +1,35 @@
+---
+import MainContainer from "./MainContainer.astro";
+---
+
+<section class="pt-14 lg:hidden">
+  <MainContainer>
+    <div class="max-w-md sm:max-w-md mx-auto">
+      <p class="text-xs text-zinc-600 font-mono uppercase">Software Engineer</p>
+      <h1
+        class="relative z-10 flex flex-col gap-y-1 w-full uppercase text-[40px] leading-none min-[340px]:text-5xl sm:text-6xl"
+      >
+        <span class="self-start">Oghenetefa</span>
+        <span class="self-end ps-4 text-stroke">Okotete</span>
+      </h1>
+    </div>
+
+    <img
+      src="/headshot-rebel.jpg"
+      alt="$Whoami"
+      width="300"
+      height="500"
+      class="w-full max-w-80 h-[400px] mx-auto object-cover -mt-4 translate-x-2 sm:translate-x-0"
+    />
+  </MainContainer>
+</section>
+
+<style>
+  .text-stroke {
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke-width: var(--stroke-width, 2px);
+    -webkit-text-stroke-color: var(--stroke-color, crimson);
+    text-stroke: var(--stroke-width, 2px) var(--stroke-color, crimson);
+  }
+</style>

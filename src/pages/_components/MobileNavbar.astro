@@ -1,0 +1,30 @@
+---
+import { navMenuList } from "../index.astro";
+import MainContainer from "./MainContainer.astro";
+---
+
+<nav class="lg:hidden w-full sticky top-0 bg-blue-600 text-zinc-100 h-12 z-50">
+  <MainContainer class="h-full">
+    <div
+      class="flex items-center justify-end gap-x-2 min-[340px]:gap-x-3 h-full"
+    >
+      {
+        navMenuList.map((item, index, arr) => {
+          return (
+            <>
+              <a
+                href={item.href}
+                class="h-full inline-flex items-center gap-x-1 px-1 min-[340px]:px-0"
+              >
+                <span class="text-sm font-medium font-mono">{item.title}</span>
+              </a>
+              {index < arr.length - 1 && (
+                <span class="text-xs font-sans">//</span>
+              )}
+            </>
+          );
+        })
+      }
+    </div>
+  </MainContainer>
+</nav>
