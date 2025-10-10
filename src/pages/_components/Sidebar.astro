@@ -27,12 +27,13 @@ const props = Astro.props;
     </div>
 
     <nav class="px-8 mt-auto flex flex-col gap-1 text-lg pt-20 pb-10">
-      <a class="hover:underline p-1.5" href="/#summary">Home</a>
-      <a class="hover:underline p-1.5" href="/#highlights">Highlights</a>
-      <a class="hover:underline p-1.5" href="/#experiences">Experiences</a>
-      <!-- <a class="hover:underline p-1.5" href="/contact">Hire a Top Talent</a> -->
-      <a class="hover:underline p-1.5" href="/#collaborate">Work with me</a>
-      <!-- <a class="hover:underline p-1.5" href="/blog">Blog</a> -->
+      {
+        desktopNavMenuList.map((link) => (
+          <a class="hover:underline p-1.5" href={link.href}>
+            {link.title}
+          </a>
+        ))
+      }
     </nav>
 
     <div class="px-8 flex gap-4 text-sm reveal-opacity">
