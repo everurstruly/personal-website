@@ -3,45 +3,43 @@ import { Github, Linkedin, Mail } from "lucide-astro";
 import { socialLinks, website } from "../seo";
 ---
 
-<section id="summary" class="text-center pt-20 pb-10">
-  <!-- <h2 class="text-center text-sm mb-4 font-bold uppercase text-zinc-600">
-    Summary
-  </h2> -->
+<section id="summary" class="pt-16 pb-10">
+  <div class="max-w-fit sm:max-w-none sm:mx-auto">
+    <p
+      class="w-full max-w-[42ch] text-lg sm:text-xl sm:text-center sm:text-balance lg:text-3xl text-black-900 mb-4"
+    >
+      Hii! I'm Oghenetefa, a passionate Front-end developer with 3+ years of
+      experience building full-stack web applications across modern JavaScript
+      frameworks and backend technologies to deliver effective, user-focused
+      products.
+    </p>
 
-  <p
-    class="text-lg sm:text-xl text-balance lg:text-3xl max-w-[42ch] mx-auto text-black-900 mb-4"
-  >
-    <!-- <slot /> -->
-    Hii! I'm Oghenetefa, a passionate Front-end developer with 3+ years of experience
-    building full-stack web applications across modern JavaScript frameworks and
-    backend technologies to deliver effective, user-focused products.
-  </p>
+    <div class="flex gap-x-6 items-center sm:justify-center">
+      {
+        [
+          { Icon: Mail, href: `https://mailto:${website.email}` },
+          { Icon: Github, href: socialLinks.github.href },
+          { Icon: Linkedin, href: socialLinks.linkedin.href },
+        ].map((item) => {
+          return (
+            <a
+              class="size-10 rounded-lg grid place-content-center text-xs"
+              href={item.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              title={item.href.replace("https://", "").split(".")[0]}
+            >
+              <item.Icon class="size-5 stroke-zinc-600" />
+            </a>
+          );
+        })
+      }
+    </div>
 
-  <div class="flex gap-x-6 items-center justify-center">
-    {
-      [
-        { Icon: Mail, href: `https://mailto:${website.email}` },
-        { Icon: Github, href: socialLinks.github.href },
-        { Icon: Linkedin, href: socialLinks.linkedin.href },
-      ].map((item) => {
-        return (
-          <a
-            class="size-10 rounded-lg grid place-content-center text-xs"
-            href={item.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            title={item.href.replace("https://", "").split(".")[0]}
-          >
-            <item.Icon class="size-5 stroke-zinc-600" />
-          </a>
-        );
-      })
-    }
+    <button
+      class="block sm:text-center sm:mx-auto mt-4 py-2 text-base text-blue-600 underline hover:text-blue-400 transition"
+    >
+      Read more about me
+    </button>
   </div>
-
-  <button
-    class="mt-4 px-4 py-2 text-base text-blue-600 underline hover:text-blue-400 transition"
-  >
-    Read more about me
-  </button>
 </section>
