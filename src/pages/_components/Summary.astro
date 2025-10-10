@@ -3,14 +3,14 @@ import { Github, Linkedin, Mail } from "lucide-astro";
 import { socialLinks, website } from "../seo";
 ---
 
-<section id="summary" class="pt-16 pb-10">
+<section id="summary" class="pt-14 pb-10">
   <div class="max-w-fit sm:max-w-none sm:mx-auto">
     <p
-      class="w-full max-w-[42ch] text-lg sm:text-xl sm:text-center sm:text-balance lg:text-3xl text-black-900 mb-4"
+      class="w-full max-w-[46ch] lg:mx-auto text-lg sm:text-xl sm:text-center lg:text-3xl text-black-900 mb-4"
     >
-      Hii! I'm Oghenetefa, a passionate Front-end developer with 3+ years of
+      Hii! I'm Tefa, a passionate Front-end developer with 3+ years of
       experience building full-stack web applications across modern JavaScript
-      frameworks and backend technologies to deliver effective, user-focused
+      frameworks and backend technologies to deliver efficient, user-focused
       products.
     </p>
 
@@ -23,7 +23,7 @@ import { socialLinks, website } from "../seo";
         ].map((item) => {
           return (
             <a
-              class="size-10 rounded-lg grid place-content-center text-xs"
+              class="size-10 rounded-full border  border-zinc-200 grid place-content-center text-xs"
               href={item.href}
               target="_blank"
               rel="noopener noreferrer"
@@ -37,7 +37,7 @@ import { socialLinks, website } from "../seo";
     </div>
 
     <button
-      class="block sm:text-center sm:mx-auto mt-4 py-2 text-base text-blue-600 underline hover:text-blue-400 transition"
+      class="block sm:text-center sm:mx-auto mt-4 py-2 text-base text-blue-600 hover:underline transition"
     >
       Read more about me
     </button>
