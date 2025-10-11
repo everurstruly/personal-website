@@ -106,15 +106,28 @@ import MainContainer from "./MainContainer.astro";
     const ghost = document.getElementById("ghostHeadshot");
     const expected = document.getElementById("expectedHeadshot");
     const wrap = document.getElementById("headshot-wrap");
+    const triggersNodeList = document.querySelectorAll(".mastermind_jumpscare");
+    const triggers = Array.from(triggersNodeList || []);
+    const isValidTiming =
+      glitchOptions.timing &&
+      typeof glitchOptions.timing.duration === "number" &&
+      typeof glitchOptions.timing.iterations === "number";
 
-    if (!ghost || !expected || !wrap) {
+    if (
+      !ghost ||
+      !expected ||
+      !wrap ||
+      triggers.length === 0 ||
+      !isValidTiming
+    ) {
       return;
     }
 
     ghost.style.opacity = "1";
     ghost.style.transitionDuration = "0ms";
     const expectedRemainInViewDurationMs = 1000;
-    setTimeout(() => {
+
+    const triggerJumpScare = () => {
       try {
         PowerGlitch.glitch("#ghostHeadshot", glitchOptions);
         PowerGlitch.glitch(
@@ -125,18 +138,9 @@ import MainContainer from "./MainContainer.astro";
         console.warn("PowerGlitch failed:", e);
       }
 
-      // compute glitch length (ms) from options and delay fade until glitch completes
       const bufferMs = 0;
-      let glitchMs = 0;
-      try {
-        const t = glitchOptions && glitchOptions.timing;
-        if (t && typeof t.duration === "number") {
-          const iterations = Number(t.iterations) || 1;
-          glitchMs = t.duration * iterations;
-        }
-      } catch (e) {
-        glitchMs = 0;
-      }
+      let totalGlitchAnimationDurationMs =
+        glitchOptions.timing.duration * glitchOptions.timing.iterations;
 
       setTimeout(
         () => {
@@ -145,7 +149,9 @@ import MainContainer from "./MainContainer.astro";
             ghost.style.opacity = "0";
           });
         },
-        glitchMs + Math.min(bufferMs, expectedRemainInViewDurationMs)
+
+        totalGlitchAnimationDurationMs +
+          Math.min(bufferMs, expectedRemainInViewDurationMs)
       );
 
       // remove ghost node after transition completes to stop glitch artifacts and free memory
@@ -161,6 +167,19 @@ import MainContainer from "./MainContainer.astro";
         },
         { once: true }
       );
+    };
+
+    triggers.forEach((trigger) => {
+      const onEvent = () => {
+        triggerJumpScare();
+      };
+
+      trigger.addEventListener("click", onEvent);
+      trigger.addEventListener("mouseenter", onEvent);
+    });
+
+    setTimeout(() => {
+      triggerJumpScare();
     }, effectDelayMs);
   });
 </script>
