@@ -10,46 +10,36 @@ type Props = {
 const props = Astro.props;
 ---
 
-<aside class={props.class}>
-  <div class="*:first:pt-10 *:last:pb-10 flex flex-col h-full overflow-y-auto">
-    <!-- <div
-      class="px-8 flex gap-x-2 hover:rotate-90 transition-transform duration-500"
+<aside class={`relative ${props.class ?? ""}`}>
+  <div
+    id="sidebar-bg"
+    class="absolute -z-10 inset-0 pointer-events-none overflow-hidden"
+  >
+    <img
+      id="sidebar-bg-photo"
+      src="/me/headshot-rebel.jpg"
+      alt="background ghost"
+      class="size-full object-cover object-center pointer-events-none"
+    />
+
+    <div
+      id="sidebar-bg-tint"
+      class="absolute inset-0 bg-green-500/15 z-20 pointer-events-none"
     >
-      <img
-        src="/headshot-rebel.jpg"
-        alt=""
-        width="80"
-        height="40"
-        class="object-cover"
-      />
-
-      <div class="text-sideways">
-        <h3 class="text-xl font-medium mb-0">Oghenetefa Okotete</h3>
-        <span class="text-sm">Software Engineer</span>
-      </div>
-    </div> -->
-
-    <div class="px-8 flex flex-col gap-y-2">
-      <!-- <img
-        src="/headshot-rebel.jpg"
-        alt=""
-        width="80"
-        height="40"
-        class="h-20 overflow-hidden object-contain bg-repeat w-full"
-      /> -->
-
-      <div
-        class="tile-grid w-full h-20 bg-zinc-50"
-        role="img"
-        aria-label="tiled headshot"
-      >
-      </div>
-
-      <div>
-        <h3 class="text-xl font-medium mb-0">Oghenetefa Okotete</h3>
-        <span class="text-sm">Software Engineer</span>
-      </div>
     </div>
+
+    <div
+      id="sidebar-bg-idle"
+      class="absolute inset-0 bg-amber-50 z-50 pointer-events-auto"
+    >
+    </div>
+  </div>
+
+  <div class="flex flex-col h-full overflow-y-auto !bg-transparent">
+    <header class="pt-10 mastermind_jumpscare px-8 flex flex-col">
+      <h3 class="text-xl font-medium mb-0">Oghenetefa Okotete</h3>
+      <span class="text-sm flex items-center gap-x-1"> Software Engineer </span>
+    </header>
 
     <nav class="px-8 mt-auto flex flex-col gap-1 text-lg pt-20 pb-10">
       {
@@ -61,17 +51,17 @@ const props = Astro.props;
       }
     </nav>
 
-    <div class="px-8 flex gap-4 text-sm reveal-opacity">
+    <footer class="pb-10 px-8 flex gap-4 text-sm reveal-opacity">
       <a class="px-1.5 py-3 hover:underline" href=`mailto:${website.email}`
-        ><Mail class="stroke-zinc-700" /></a
+        ><Mail class="size-5 stroke-zinc-700" /></a
       >
       <a class="px-1.5 py-3 hover:underline" href={socialLinks.github.href}
-        ><Github class="stroke-zinc-700" /></a
+        ><Github class="size-5 stroke-zinc-700" /></a
       >
       <a class="px-1.5 py-3 hover:underline" href={socialLinks.linkedin.href}
         ><Linkedin class="size-5 stroke-zinc-700" /></a
       >
-    </div>
+    </footer>
   </div>
 </aside>
 
@@ -92,7 +82,7 @@ const props = Astro.props;
   /* Option A — quick: gradient + image (works, but background-image swap doesn't smoothly crossfade) */
   .tile-grid {
     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-      url("/headshot-rebel.jpg");
+      url("/me/headshot-rebel.jpg");
     background-repeat: repeat;
     background-position: center;
     background-size: 40px 40px;
@@ -105,7 +95,7 @@ const props = Astro.props;
   /* Option B — recommended: use a pseudo-element overlay and transition its opacity */
   .tile-grid {
     position: relative;
-    background-image: url("/headshot-rebel.jpg");
+    background-image: url("/me/headshot-rebel.jpg");
     background-repeat: repeat;
     background-position: center;
     background-size: 40px 40px;
@@ -121,10 +111,190 @@ const props = Astro.props;
     transition: opacity 0.35s ease;
     opacity: 1; /* tinted by default */
   }
-  .tile-grid:hover {
-    background-size: 120px 120px;
+
+  #sidebar-bg {
+    /* control sidebar layer transitions explicitly to ensure instant show and fast fade-out */
+    --transition-duration: 300ms; /* default fade-out duration */
+    --transition-ease: cubic-bezier(0.2, 0.9, 0.2, 1);
+    --sidebar-transition: opacity var(--transition-duration)
+      var(--transition-ease);
   }
-  .tile-grid:hover::before {
-    opacity: 0; /* fade tint away on hover; fades back when mouse leaves */
+  /* ensure transitions are always present on the layers so they animate both in and out */
+  #sidebar-bg-photo,
+  #sidebar-bg-tint,
+  #sidebar-bg-idle {
+    /* set a default fast fade-out; use !important so inline styles from JS won't prevent this behavior */
+    transition: var(--sidebar-transition) !important;
+  }
+
+  /* default state: idle visible, photo/tint hidden */
+  #sidebar-bg-photo,
+  #sidebar-bg-tint {
+    opacity: 0;
+  }
+  #sidebar-bg-idle {
+    opacity: 1;
+  }
+
+  /* when .reveal is present, show ghost photo + tint instantly (no fade-in) */
+  #sidebar-bg.reveal #sidebar-bg-photo,
+  #sidebar-bg.reveal #sidebar-bg-tint {
+    transition-duration: 0ms !important; /* show instantly */
+    opacity: 1;
+  }
+  /* idle should hide using the standard fast fade-out */
+  #sidebar-bg.reveal #sidebar-bg-idle {
+    opacity: 0;
   }
 </style>
+
+<script>
+  import { PowerGlitch } from "powerglitch";
+  import type { PowerGlitchOptions } from "powerglitch";
+
+  const jumpscareGlitchOptions: PowerGlitchOptions = {
+    playMode: "manual",
+    optimizeSeo: true,
+    createContainers: true,
+    hideOverflow: false,
+    timing: {
+      duration: 2000,
+      iterations: 1,
+    },
+    glitchTimeSpan: {
+      start: 0,
+      end: 1,
+    },
+    shake: false,
+    slice: {
+      count: 6,
+      velocity: 15,
+      minHeight: 0.02,
+      maxHeight: 0.15,
+      hueRotate: true,
+      cssFilters: "",
+    },
+    pulse: false,
+  };
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const jumpscareCanvasEl = document.getElementById("sidebar-bg");
+    const jumpscarePhotoEl = document.getElementById("sidebar-bg-photo");
+    const jumpscareTriggersEl = document.querySelectorAll(
+      ".mastermind_jumpscare"
+    );
+
+    const isValidTiming =
+      jumpscareGlitchOptions.timing &&
+      typeof jumpscareGlitchOptions.timing.duration === "number" &&
+      typeof jumpscareGlitchOptions.timing.iterations === "number";
+
+    if (
+      !jumpscarePhotoEl ||
+      !jumpscareTriggersEl ||
+      !isValidTiming ||
+      !jumpscareCanvasEl
+    ) {
+      return;
+    }
+
+    // helper to start a glitch cycle: show ghost+tint, run glitch, hide while glitch still running
+    let stopTimer: ReturnType<typeof globalThis.setTimeout> | null = null;
+    let fadeTimer: ReturnType<typeof globalThis.setTimeout> | null = null;
+
+    // parse CSS time strings like '300ms' or '0.3s' or plain numbers (ms)
+    function parseCssTimeMs(raw: string | null | undefined) {
+      if (!raw) return null;
+      const s = String(raw).trim();
+      if (!s) return null;
+      if (s.endsWith("ms")) return parseFloat(s.replace(/ms$/, ""));
+      if (s.endsWith("s")) return parseFloat(s.replace(/s$/, "")) * 1000;
+      const n = parseFloat(s);
+      return Number.isFinite(n) ? n : null;
+    }
+
+    function startGlitchCycle(options: PowerGlitchOptions) {
+      // read durations from CSS variables on the container so CSS is the source-of-truth
+      const computed = getComputedStyle(jumpscareCanvasEl!);
+      const cssGlitch = parseCssTimeMs(
+        computed.getPropertyValue("--glitch-duration")?.trim()
+      );
+      const cssFade = parseCssTimeMs(
+        computed.getPropertyValue("--fade-duration")?.trim()
+      );
+
+      const glitchDuration = cssGlitch ?? options.timing?.duration ?? 2000;
+      const fadeMs =
+        cssFade ??
+        parseCssTimeMs(computed.getPropertyValue("--transition-duration")) ??
+        300;
+
+      const runtimeOptions: PowerGlitchOptions = {
+        ...options,
+        timing: { ...(options.timing || {}), duration: glitchDuration },
+      };
+
+      const { containers, startGlitch, stopGlitch } = PowerGlitch.glitch(
+        jumpscarePhotoEl!,
+        runtimeOptions
+      );
+
+      // FIXME: ensure size adaptive containers
+      if (containers) {
+        containers.forEach((layerOne) => {
+          layerOne.style.height = "100%";
+          layerOne.style.width = "100%";
+          const layerTwo = layerOne.getElementsByTagName("div")[0];
+          if (layerTwo) {
+            layerTwo.style.height = "100%";
+            layerTwo.style.width = "100%";
+          }
+        });
+      }
+
+      const totalGlitchAnimationDurationMs =
+        glitchDuration * (options.timing?.iterations || 1);
+
+      // avoid flicker if re-triggered quickly
+      if (stopTimer) {
+        clearTimeout(stopTimer);
+        stopTimer = null;
+      }
+      if (fadeTimer) {
+        clearTimeout(fadeTimer);
+        fadeTimer = null;
+      }
+
+      // ensure the CSS transition duration used by the fade matches our fadeMs
+      jumpscareCanvasEl?.style.setProperty(
+        "--transition-duration",
+        `${fadeMs}ms`
+      );
+
+      startGlitch();
+      jumpscareCanvasEl?.classList.add("reveal");
+
+      // schedule fade-out to start while glitch is still running (so it transitions out with the glitch)
+      const fadeStartAt = Math.max(0, totalGlitchAnimationDurationMs - fadeMs);
+      fadeTimer = setTimeout(() => {
+        jumpscareCanvasEl?.classList.remove("reveal");
+        fadeTimer = null;
+      }, fadeStartAt);
+
+      // stop the glitch at the end of the full animation duration
+      stopTimer = setTimeout(() => {
+        stopGlitch();
+        stopTimer = null;
+      }, totalGlitchAnimationDurationMs);
+    }
+
+    // initial gentle glitch on load (ghost/tint visible only for the glitch)
+    startGlitchCycle(jumpscareGlitchOptions);
+
+    jumpscareTriggersEl.forEach((trigger) => {
+      trigger.addEventListener("mouseenter", () => {
+        startGlitchCycle(jumpscareGlitchOptions);
+      });
+    });
+  });
+</script>
