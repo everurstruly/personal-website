@@ -87,8 +87,8 @@ body {
 }
 
 html {
-  --pageTexturedBackgroundImageUrlOnLightMode: url("/bg-grain-texture-on-light-canvas.png");
-  --pageTexturedBackgroundImageUrlOnDarkMode: url("/bg-grain-texture-on-dark-canvas.png");
+  --pageTexturedBackgroundImageUrlOnLightMode: url("/background/bg-grain-texture-on-light-canvas.png");
+  --pageTexturedBackgroundImageUrlOnDarkMode: url("/background/bg-grain-texture-on-dark-canvas.png");
 
   overflow-y: scroll;
   smooth-scroll: auto;

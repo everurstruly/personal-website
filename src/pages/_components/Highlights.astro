@@ -4,6 +4,7 @@ import { ExternalLink } from "lucide-astro";
 
 const highlights = [
   {
+    cover: "/highlights/project-champions.png",
     id: "tournament",
     date: "2025",
     title: "Tournament Administration & Management Software",
@@ -15,6 +16,7 @@ const highlights = [
     detailsUrl: "https://github.com/everurstruly/tournament-management-system",
   },
   {
+    cover: "/highlights/project-camera.jpg",
     id: "travel",
     date: "2025",
     title: "Travel Experience Booking Platform",
@@ -27,6 +29,7 @@ const highlights = [
       "https://github.com/everurstruly/travel-experiences-marketplace",
   },
   {
+    cover: "/highlights/project-wallet.png",
     id: "fintech",
     date: "2025",
     title: "Offramping Fintech Platform",
@@ -38,7 +41,8 @@ const highlights = [
     detailsUrl: "https://github.com/everurstruly",
   },
   {
-    id: "static",
+    cover: "/highlights/project-game-controller.jpg",
+    id: "game",
     date: "2025",
     title: "Word Guessing Puzzle Game",
     description:
@@ -94,9 +98,13 @@ const tints = ["red", "green", "yellow", "blue"];
           <article class="w-full lg:w-1/3 grow">
             <div class="tinted-image w-full h-80 bg-zinc-100 overflow-hidden">
               <img
-                src={`/headshot-professional.jpg`}
+                src={
+                  project.cover
+                    ? project.cover
+                    : `/me/headshot-professional.jpg`
+                }
                 alt={`${project.title}`}
-                class="w-full h-full object-cover"
+                class="w-full h-full object-scale-down"
               />
               <div
                 class="tint-overlay"
@@ -175,7 +183,7 @@ const tints = ["red", "green", "yellow", "blue"];
       transform 300ms ease;
   }
 
-  .tinted-image:hover .tint-overlay {
+  article:hover .tinted-image .tint-overlay {
     opacity: 0.6;
     transform: scale(1.02);
   }
