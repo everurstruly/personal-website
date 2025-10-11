@@ -34,7 +34,10 @@ const experiences = [
 // const timelineClasses = ["timeline-red","timeline-yellow","timeline-green","timeline-blue"];
 ---
 
-<section id="experiences" class="pt-16 pb-20 lg:flex-row-reverse__ lg:items-start__ lg:gap-x-3">
+<section
+  id="experiences"
+  class="pt-16 pb-20 lg:flex-row-reverse__ lg:items-start__ lg:gap-x-3"
+>
   <header
     class="mb-8 flex flex-wrap gap-y-2 items-center gap-x-4 justify-between"
   >
@@ -53,11 +56,13 @@ const experiences = [
 
   <div class="flex flex-col *:py-10">
     {
-    experiences.map((work) => (
-      // <article class={`relative w-full lg:max-w-3xl grow timeline-shell ${timelineClasses[idx % timelineClasses.length]}`}>
-      
-  <article class={`relative w-full lg:max-w-3xl grow timeline-shell timeline-black`}>
-        <!-- scalable decorative wrapper (folder-like) -->
+      experiences.map((work) => (
+        // <article class={`relative w-full lg:max-w-3xl grow timeline-shell ${timelineClasses[idx % timelineClasses.length]}`}>
+
+        <article
+          class={`relative w-full lg:max-w-3xl grow timeline-shell timeline-black`}
+        >
+          {/* <!-- scalable decorative wrapper (folder-like) -->
         <svg
           class="absolute inset-0 w-full h-full pointer-events-none"
           viewBox="0 0 600 400"
@@ -72,32 +77,36 @@ const experiences = [
             stroke-width="4"
             stroke-linejoin="round"
           />
-        </svg>
+        </svg> */}
 
           <div class="lg:flex items-start">
             <div class="shrink-0 lg:w-[var(--timeline-col-width)] lg:pe-10 lg:text-end">
-            <span class="lg:mt-4 text-xs lg:text-sm font-mono mb-6 capitalize lg:text-nowrap timeline-date">
-              {work.date?.[0]} — {work.date?.[1]}
-            </span>
-          </div>
+              <span class="lg:mt-4 text-xs lg:text-sm font-mono mb-6 capitalize lg:text-nowrap timeline-date">
+                {work.date?.[0]} — {work.date?.[1]}
+              </span>
+            </div>
 
-          <div class="lg:ps-10">
-            <header class="mb-2">
-              <h4 class="text-base sm:text-lg font-semibold lg:text-xl">
-                <span>{work.role}</span> at <a href="#" class="text-zinc-950">{work.business}</a>
-              </h4>
-            </header>
-            <p class="text-sm lg:text-base mb-3">{work.contribution}</p>
-            <ul class="text-xs font-medium py-1 flex flex-wrap gap-2">
-              {work.tech?.map((tech, i, arr) => (
-                <li class="text-zinc-600 py-1">
-                  {tech}{i + 1 !== arr.length ? "," : ""}
-                </li>
-              ))}
-            </ul>
+            <div class="lg:ps-10">
+              <header class="mb-2">
+                <h4 class="text-base sm:text-lg lg:text-xl__">
+                  <span class="font-semibold">{work.role}</span> at{" "}
+                  <a href="#" class="text-zinc-950">
+                    {work.business}
+                  </a>
+                </h4>
+              </header>
+              <p class="text-sm lg:text-base mb-3">{work.contribution}</p>
+              <ul class="text-xs font-medium py-1 flex flex-wrap gap-2">
+                {work.tech?.map((tech, i, arr) => (
+                  <li class="text-zinc-600 py-1">
+                    {tech}
+                    {i + 1 !== arr.length ? "," : ""}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
-        </div>
-      </article>
+        </article>
       ))
     }
   </div>
@@ -106,11 +115,13 @@ const experiences = [
 <style>
   @media screen and (min-width: 1024px) {
     .timeline-shell {
-      --border-width: 1px;  /* thickness of the dashed line */
-      --border-height: 1px;  /* thickness of the dashed line */
+      --border-width: 1px; /* thickness of the dashed line */
+      --border-height: 1px; /* thickness of the dashed line */
       --timeline-col-width: 16rem; /* matches Tailwind lg:w-52 (13rem / 208px) */
       --transition-duration: 700ms;
-      --border-gap: calc(var(--border-width) * 0); /* default gap between dash segments */
+      --border-gap: calc(
+        var(--border-width) * 0
+      ); /* default gap between dash segments */
     }
 
     .timeline-shell::before {
@@ -126,29 +137,33 @@ const experiences = [
       /* vertical gradient that fades at top/bottom and transitions through colors */
       background: linear-gradient(
         to bottom,
-        rgba(255,255,255,0) 0%,
-        rgba(0,0,0,0.02) 6%,
-        rgba(0,0,0,0.04) 18%,
-        rgba(0,0,0,0.04) 82%,
-        rgba(0,0,0,0.02) 94%,
-        rgba(255,255,255,0) 100%
+        rgba(255, 255, 255, 0) 0%,
+        rgba(0, 0, 0, 0.02) 6%,
+        rgba(0, 0, 0, 0.04) 18%,
+        rgba(0, 0, 0, 0.04) 82%,
+        rgba(0, 0, 0, 0.02) 94%,
+        rgba(255, 255, 255, 0) 100%
       );
 
       /* use a repeating mask to create the dashed segments from that gradient */
       -webkit-mask: repeating-linear-gradient(
         to bottom,
         #000 0 var(--border-width),
-        transparent var(--border-width) calc(var(--border-width) + var(--border-gap))
+        transparent var(--border-width)
+          calc(var(--border-width) + var(--border-gap))
       );
       mask: repeating-linear-gradient(
         to bottom,
         #000 0 var(--border-width),
-        transparent var(--border-width) calc(var(--border-width) + var(--border-gap))
+        transparent var(--border-width)
+          calc(var(--border-width) + var(--border-gap))
       );
 
       /* subtle transition for hover/show/hide */
       opacity: 0.85;
-      transition: opacity var(--transition-duration) ease, transform var(--transition-duration) ease;
+      transition:
+        opacity var(--transition-duration) ease,
+        transform var(--transition-duration) ease;
       transform-origin: top center;
     }
 
@@ -165,15 +180,19 @@ const experiences = [
       -webkit-mask: repeating-linear-gradient(
         to bottom,
         #000 0 var(--border-width),
-        transparent var(--border-width) calc(var(--border-width) + var(--border-gap))
+        transparent var(--border-width)
+          calc(var(--border-width) + var(--border-gap))
       );
       mask: repeating-linear-gradient(
         to bottom,
         #000 0 var(--border-width),
-        transparent var(--border-width) calc(var(--border-width) + var(--border-gap))
+        transparent var(--border-width)
+          calc(var(--border-width) + var(--border-gap))
       );
       transform-origin: top center;
-      transition: opacity var(--transition-duration) ease, transform var(--transition-duration) ease;
+      transition:
+        opacity var(--transition-duration) ease,
+        transform var(--transition-duration) ease;
     }
 
     /* base gray line */
@@ -182,12 +201,12 @@ const experiences = [
       opacity: 0.9;
       background: linear-gradient(
         to bottom,
-        rgba(255,255,255,0) 0%,
-        rgba(0,0,0,0.08) 10%,
-        rgba(0,0,0,0.14) 20%,
-        rgba(0,0,0,0.14) 80%,
-        rgba(0,0,0,0.08) 90%,
-        rgba(255,255,255,0) 100%
+        rgba(255, 255, 255, 0) 0%,
+        rgba(0, 0, 0, 0.08) 10%,
+        rgba(0, 0, 0, 0.14) 20%,
+        rgba(0, 0, 0, 0.14) 80%,
+        rgba(0, 0, 0, 0.08) 90%,
+        rgba(255, 255, 255, 0) 100%
       );
     }
 
@@ -198,10 +217,10 @@ const experiences = [
       transform: translateY(-10%);
       background: linear-gradient(
         to bottom,
-        rgba(255,255,255,0) 0%,
+        rgba(255, 255, 255, 0) 0%,
         var(--timeline-color) 12%,
         var(--timeline-color) 88%,
-        rgba(255,255,255,0) 100%
+        rgba(255, 255, 255, 0) 100%
       );
     }
 
@@ -218,16 +237,35 @@ const experiences = [
 
 <style>
   /* small utility classes to map to the --timeline-color variable */
-  .timeline-zinc { --timeline-color: #666; }
-  .timeline-black { --timeline-color: #000; }
-  .timeline-red { --timeline-color: #ef4444; }
-  .timeline-yellow { --timeline-color: #f59e0b; }
-  .timeline-green { --timeline-color: #107d58; }
-  .timeline-blue { --timeline-color: #2563eb; }
+  .timeline-zinc {
+    --timeline-color: #666;
+  }
+  .timeline-black {
+    --timeline-color: #000;
+  }
+  .timeline-red {
+    --timeline-color: #ef4444;
+  }
+  .timeline-yellow {
+    --timeline-color: #f59e0b;
+  }
+  .timeline-green {
+    --timeline-color: #107d58;
+  }
+  .timeline-blue {
+    --timeline-color: #2563eb;
+  }
   /* gap utilities for the dashed timeline */
-  .timeline-gap-none { --border-gap: 0px; }
-  .timeline-gap-sm { --border-gap: calc(var(--border-width) * 1); }
-  .timeline-gap-md { --border-gap: calc(var(--border-width) * 3); }
-  .timeline-gap-lg { --border-gap: calc(var(--border-width) * 6); }
+  .timeline-gap-none {
+    --border-gap: 0px;
+  }
+  .timeline-gap-sm {
+    --border-gap: calc(var(--border-width) * 1);
+  }
+  .timeline-gap-md {
+    --border-gap: calc(var(--border-width) * 3);
+  }
+  .timeline-gap-lg {
+    --border-gap: calc(var(--border-width) * 6);
+  }
 </style>
-  
