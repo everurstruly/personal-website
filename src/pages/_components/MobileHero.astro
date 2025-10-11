@@ -7,20 +7,37 @@ import MainContainer from "./MainContainer.astro";
     <div class="max-w-md sm:max-w-md mx-auto">
       <p class="text-xs text-zinc-600 font-mono uppercase">Software Engineer</p>
       <h1
-        class="relative z-10 flex flex-col gap-y-1 w-full uppercase text-[40px] leading-none min-[340px]:text-5xl sm:text-6xl"
+        class="mastermind_jumpscare relative z-10 flex flex-col gap-y-1 w-full uppercase text-[40px] leading-none min-[340px]:text-5xl sm:text-6xl"
       >
         <span class="self-start">Oghenetefa</span>
-        <span class="self-end ps-4 text-stroke">Okotete</span>
+        <span class="self-end ps-4 sm:self-start sm:ps-0">Okotete</span>
       </h1>
     </div>
 
-    <img
-      src="/headshot-rebel.jpg"
-      alt="$Whoami"
-      width="300"
-      height="500"
-      class="w-full max-w-80 h-[400px] mx-auto object-cover -mt-4 translate-x-2 sm:translate-x-0"
-    />
+    <!-- stacked images: ghost on top, expected underneath -->
+    <div
+      id="headshot-wrap"
+      class="w-full max-w-80 h-[400px] mx-auto -mt-6__ mt-4 translate-x-2 sm:translate-x-0 relative overflow-hidden"
+    >
+      <img
+        id="expectedHeadshot"
+        src="/headshot-youth.jpg"
+        alt="$whoami"
+        width="300"
+        height="500"
+        class="w-full h-full object-cover block object-center"
+      />
+
+      <img
+        id="ghostHeadshot"
+        src="/headshot-rebel.jpg"
+        alt="ghost"
+        width="300"
+        height="500"
+        class="w-full h-full object-cover absolute inset-0"
+        style="opacity:1; transition: opacity 600ms ease-in-out;"
+      />
+    </div>
   </MainContainer>
 </section>
 
@@ -33,3 +50,117 @@ import MainContainer from "./MainContainer.astro";
     text-stroke: var(--stroke-width, 2px) var(--stroke-color, crimson);
   }
 </style>
+
+<script>
+  import { PowerGlitch } from "powerglitch";
+  import type { PowerGlitchOptions } from "powerglitch";
+
+  const effectDelayMs = 2000;
+  const glitchOptions: PowerGlitchOptions = {
+    playMode: "always",
+    optimizeSeo: true,
+    createContainers: true,
+    hideOverflow: false,
+    timing: {
+      duration: 1500,
+      iterations: 1,
+    },
+    glitchTimeSpan: {
+      start: 0.2,
+      end: 0.8,
+    },
+    shake: {
+      velocity: 15,
+      amplitudeX: 0.2,
+      amplitudeY: 0.2,
+    },
+    slice: {
+      count: 6,
+      velocity: 15,
+      minHeight: 0.02,
+      maxHeight: 0.15,
+      hueRotate: true,
+      cssFilters: "",
+    },
+    pulse: false,
+  };
+
+  const glitchOptionsLongedByMs = (
+    delay: number,
+    options: PowerGlitchOptions
+  ) => {
+    const defaultGlitch = PowerGlitch.getDefaultOptions();
+    const glitch = {
+      ...options,
+      timing: {
+        ...defaultGlitch.timing,
+        ...options?.timing,
+      },
+    };
+
+    glitch.timing.duration += delay;
+    return glitch;
+  };
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const ghost = document.getElementById("ghostHeadshot");
+    const expected = document.getElementById("expectedHeadshot");
+    const wrap = document.getElementById("headshot-wrap");
+
+    if (!ghost || !expected || !wrap) {
+      return;
+    }
+
+    ghost.style.opacity = "1";
+    ghost.style.transitionDuration = "0ms";
+    const expectedRemainInViewDurationMs = 1000;
+    setTimeout(() => {
+      try {
+        PowerGlitch.glitch("#ghostHeadshot", glitchOptions);
+        PowerGlitch.glitch(
+          "#expectedHeadshot",
+          glitchOptionsLongedByMs(expectedRemainInViewDurationMs, glitchOptions)
+        );
+      } catch (e) {
+        console.warn("PowerGlitch failed:", e);
+      }
+
+      // compute glitch length (ms) from options and delay fade until glitch completes
+      const bufferMs = 0;
+      let glitchMs = 0;
+      try {
+        const t = glitchOptions && glitchOptions.timing;
+        if (t && typeof t.duration === "number") {
+          const iterations = Number(t.iterations) || 1;
+          glitchMs = t.duration * iterations;
+        }
+      } catch (e) {
+        glitchMs = 0;
+      }
+
+      setTimeout(
+        () => {
+          // trigger fade-out to reveal expected image underneath
+          requestAnimationFrame(() => {
+            ghost.style.opacity = "0";
+          });
+        },
+        glitchMs + Math.min(bufferMs, expectedRemainInViewDurationMs)
+      );
+
+      // remove ghost node after transition completes to stop glitch artifacts and free memory
+      ghost.addEventListener(
+        "transitionend",
+        () => {
+          console.log("wtffff");
+          try {
+            ghost.remove();
+          } catch (e) {
+            /* no-op */
+          }
+        },
+        { once: true }
+      );
+    }, effectDelayMs);
+  });
+</script>

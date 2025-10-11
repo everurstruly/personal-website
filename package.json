@@ -54,6 +54,7 @@
     "eslint-plugin-jsx-a11y": "^6.8.0",
     "lucide-astro": "^0.545.0",
     "lucide-react": "^0.545.0",
+    "powerglitch": "^2.5.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "sharp": "^0.33.3",

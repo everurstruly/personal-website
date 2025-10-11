@@ -1,4 +1,7 @@
 ---
+import { Button } from "@/lib/components/ui/button";
+import { ExternalLink } from "lucide-astro";
+
 const experiences = [
   {
     date: ["July 2024", "Till Date"],
@@ -30,22 +33,21 @@ const experiences = [
 ];
 ---
 
-<section
-  id="experiences"
-  class="pt-16 pb-20 lg:flex lg:items-start lg:gap-x-20"
->
+<section id="experiences" class="pt-16 pb-20 lg:flex lg:items-start lg:gap-x-3">
   <header
-    class="mb-8 flex flex-wrap gap-y-2 items-center gap-x-4 justify-between lg:flex-col lg:items-start lg:gap-y-1 lg:sticky lg:top-28 lg:h-full"
+    class="mb-8 flex flex-wrap gap-y-2 items-center gap-x-4 justify-between lg:flex-col lg:items-start lg:gap-y-4 lg:sticky lg:top-28 lg:h-full"
   >
     <h2 class="text-4xl lg:text-5xl font-semibold uppercase text-zinc-800">
       Work Experiences
     </h2>
 
-    <button
-      class="text-nowrap ms-0 self-end sm:self-start sm:ms-auto text-start text-sm underline py-1.5 mt-auto text-blue-600"
+    <Button
+      variant="link"
+      className="px-0 flex text-sm ms-auto sm:ms-0 text-blue-600"
     >
       Download My Resume
-    </button>
+      <ExternalLink />
+    </Button>
   </header>
 
   <div class="lg:ms-auto flex flex-col gap-y-20 lg:gap-y-20">
@@ -53,18 +55,32 @@ const experiences = [
       experiences.map((work) => (
         <article class="w-full lg:max-w-lg flex flex-col grow">
           <header class="mb-2">
-            <span class="text-xs mb-6 capitalize">
+            <span class="text-xs font-mono mb-6 capitalize">
               {work.date[0]} — {work.date[1]}
             </span>
 
-            <h4 class="text-base font-medium lg:text-lg sm:text-nowrap">
-              <span>{work.role}</span> at <a href="#">{work.business}</a>
+            <h4 class="text-base font-semibold lg:text-lg sm:text-nowrap">
+              <span>{work.role}</span> at{" "}
+              <a href="#" class="text-zinc-600">
+                {work.business}
+              </a>
             </h4>
           </header>
 
-          <p class="text-sm lg:text-base py-1">{work.contribution}</p>
+          <p class="text-sm lg:text-base">{work.contribution}</p>
 
-          <div class="flex flex-wrap gap-x-6 gap-y-4 py-2 mb-2">
+          <ul class="text-sm font-medium py-1 flex flex-wrap gap-2">
+            {work.tech.map((tech, index, arr) => {
+              return (
+                <li class="text-zinc-600 py-1">
+                  {tech}
+                  {index + 1 !== arr.length ? "," : ""}
+                </li>
+              );
+            })}
+          </ul>
+
+          {/* <div class="flex flex-wrap justify-end gap-x-3 gap-y-4 py-2">
             {work.attachments.map((attachment) => {
               return (
                 <a
@@ -75,17 +91,7 @@ const experiences = [
                 </a>
               );
             })}
-          </div>
-
-          <ul class="text-sm text-black-600 font-medium py-1 flex flex-wrap gap-6">
-            {work.tech.map((tech) => {
-              return (
-                <li class="text-stone-600 py-1 px-2__ rounded-lg bg-zinc-100..">
-                  {tech}
-                </li>
-              );
-            })}
-          </ul>
+          </div> */}
         </article>
       ))
     }

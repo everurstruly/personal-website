@@ -1,4 +1,7 @@
 ---
+import { Button } from "@/lib/components/ui/button";
+import { ExternalLink } from "lucide-astro";
+
 const highlights = [
   {
     id: "tournament",
@@ -67,11 +70,19 @@ const highlights = [
       Featured Projects
     </h2>
 
-    <button
+    <!-- <button
       class="text-nowrap self-end ms-auto text-sm underline text-blue-600 py-1 px-2"
     >
       View Archive
-    </button>
+    </button> -->
+
+    <Button
+      variant="link"
+      className="px-0 flex mt-4 text-sm sm:ms-auto text-blue-600"
+    >
+      View Archive
+      <ExternalLink />
+    </Button>
   </header>
 
   <div class="flex flex-wrap gap-y-20 gap-x-8 lg:gap-x-12 lg:gap-y-20">
@@ -86,14 +97,14 @@ const highlights = [
 
           <div class="flex flex-col p-1">
             <div class="flex items-start gap-x-6 justify-between py-2">
-              <h4 class="text-base lg:text-lg font-medium leading-tight">
+              <h4 class="text-base sm:text-lg font-semibold !leading-tight">
                 {project.title}
               </h4>
               <span class="text-sm">{project.date}</span>
             </div>
 
-            <p class="text-sm lg:text-base text-black-600">
-              {project.description} <span class="font-semibold">In build:</span>{" "}
+            <p class="text-sm sm:text-base text-zinc-600">
+              {project.description} <span class="font-semibold">Build:</span>{" "}
               {project.tech.map((tag, index, arr) => {
                 const prefix = index === 0 ? "" : ", ";
                 const sufix = index === arr.length - 1 ? "." : "";
