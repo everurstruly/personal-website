@@ -31,11 +31,12 @@ const experiences = [
     tech: ["Typescript", "Next.js", "Nest.js", "Tailwind CSS", "Git"],
   },
 ];
+// const timelineClasses = ["timeline-red","timeline-yellow","timeline-green","timeline-blue"];
 ---
 
-<section id="experiences" class="pt-16 pb-20 lg:flex lg:items-start lg:gap-x-3">
+<section id="experiences" class="pt-16 pb-20 lg:flex-row-reverse__ lg:items-start__ lg:gap-x-3">
   <header
-    class="mb-8 flex flex-wrap gap-y-2 items-center gap-x-4 justify-between lg:flex-col lg:items-start lg:gap-y-4 lg:sticky lg:top-28 lg:h-full"
+    class="mb-8 flex flex-wrap gap-y-2 items-center gap-x-4 justify-between"
   >
     <h2 class="text-4xl lg:text-5xl font-semibold uppercase text-zinc-800">
       Work Experiences
@@ -50,50 +51,183 @@ const experiences = [
     </Button>
   </header>
 
-  <div class="lg:ms-auto flex flex-col gap-y-20 lg:gap-y-20">
+  <div class="flex flex-col *:py-10">
     {
-      experiences.map((work) => (
-        <article class="w-full lg:max-w-lg flex flex-col grow">
-          <header class="mb-2">
-            <span class="text-xs font-mono mb-6 capitalize">
-              {work.date[0]} — {work.date[1]}
+    experiences.map((work) => (
+      // <article class={`relative w-full lg:max-w-3xl grow timeline-shell ${timelineClasses[idx % timelineClasses.length]}`}>
+      
+  <article class={`relative w-full lg:max-w-3xl grow timeline-shell timeline-black`}>
+        <!-- scalable decorative wrapper (folder-like) -->
+        <svg
+          class="absolute inset-0 w-full h-full pointer-events-none"
+          viewBox="0 0 600 400"
+          preserveAspectRatio="none"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+        >
+          <path
+            d="M20 90 H160 L210 50 H580 A18 18 0 0 1 598 68 V342 A18 18 0 0 1 580 360 H20 A18 18 0 0 1 2 342 V108 A18 18 0 0 1 20 90 Z"
+            fill="none"
+            stroke="rgba(0,0,0,0.02)"
+            stroke-width="4"
+            stroke-linejoin="round"
+          />
+        </svg>
+
+          <div class="lg:flex items-start">
+            <div class="shrink-0 lg:w-[var(--timeline-col-width)] lg:pe-10 lg:text-end">
+            <span class="lg:mt-4 text-xs lg:text-sm font-mono mb-6 capitalize lg:text-nowrap timeline-date">
+              {work.date?.[0]} — {work.date?.[1]}
             </span>
+          </div>
 
-            <h4 class="text-base font-semibold lg:text-lg sm:text-nowrap">
-              <span>{work.role}</span> at{" "}
-              <a href="#" class="text-zinc-600">
-                {work.business}
-              </a>
-            </h4>
-          </header>
-
-          <p class="text-sm lg:text-base">{work.contribution}</p>
-
-          <ul class="text-sm font-medium py-1 flex flex-wrap gap-2">
-            {work.tech.map((tech, index, arr) => {
-              return (
+          <div class="lg:ps-10">
+            <header class="mb-2">
+              <h4 class="text-base sm:text-lg font-semibold lg:text-xl">
+                <span>{work.role}</span> at <a href="#" class="text-zinc-950">{work.business}</a>
+              </h4>
+            </header>
+            <p class="text-sm lg:text-base mb-3">{work.contribution}</p>
+            <ul class="text-xs font-medium py-1 flex flex-wrap gap-2">
+              {work.tech?.map((tech, i, arr) => (
                 <li class="text-zinc-600 py-1">
-                  {tech}
-                  {index + 1 !== arr.length ? "," : ""}
+                  {tech}{i + 1 !== arr.length ? "," : ""}
                 </li>
-              );
-            })}
-          </ul>
-
-          {/* <div class="flex flex-wrap justify-end gap-x-3 gap-y-4 py-2">
-            {work.attachments.map((attachment) => {
-              return (
-                <a
-                  href={attachment.url}
-                  class="text-sm text-blue-600 hover:underline"
-                >
-                  {attachment.label}
-                </a>
-              );
-            })}
-          </div> */}
-        </article>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </article>
       ))
     }
   </div>
 </section>
+
+<style>
+  @media screen and (min-width: 1024px) {
+    .timeline-shell {
+      --border-width: 1px;  /* thickness of the dashed line */
+      --border-height: 1px;  /* thickness of the dashed line */
+      --timeline-col-width: 16rem; /* matches Tailwind lg:w-52 (13rem / 208px) */
+      --transition-duration: 700ms;
+      --border-gap: calc(var(--border-width) * 0); /* default gap between dash segments */
+    }
+
+    .timeline-shell::before {
+      content: "";
+      position: absolute;
+      z-index: 2;
+      top: 0;
+      left: var(--timeline-col-width);
+      height: 100%;
+      width: var(--border-height);
+      pointer-events: none;
+
+      /* vertical gradient that fades at top/bottom and transitions through colors */
+      background: linear-gradient(
+        to bottom,
+        rgba(255,255,255,0) 0%,
+        rgba(0,0,0,0.02) 6%,
+        rgba(0,0,0,0.04) 18%,
+        rgba(0,0,0,0.04) 82%,
+        rgba(0,0,0,0.02) 94%,
+        rgba(255,255,255,0) 100%
+      );
+
+      /* use a repeating mask to create the dashed segments from that gradient */
+      -webkit-mask: repeating-linear-gradient(
+        to bottom,
+        #000 0 var(--border-width),
+        transparent var(--border-width) calc(var(--border-width) + var(--border-gap))
+      );
+      mask: repeating-linear-gradient(
+        to bottom,
+        #000 0 var(--border-width),
+        transparent var(--border-width) calc(var(--border-width) + var(--border-gap))
+      );
+
+      /* subtle transition for hover/show/hide */
+      opacity: 0.85;
+      transition: opacity var(--transition-duration) ease, transform var(--transition-duration) ease;
+      transform-origin: top center;
+    }
+
+    /* consolidate pseudo-elements for the dashed timeline */
+    .timeline-shell::before,
+    .timeline-shell::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: var(--timeline-col-width);
+      height: 100%;
+      width: var(--border-height);
+      pointer-events: none;
+      -webkit-mask: repeating-linear-gradient(
+        to bottom,
+        #000 0 var(--border-width),
+        transparent var(--border-width) calc(var(--border-width) + var(--border-gap))
+      );
+      mask: repeating-linear-gradient(
+        to bottom,
+        #000 0 var(--border-width),
+        transparent var(--border-width) calc(var(--border-width) + var(--border-gap))
+      );
+      transform-origin: top center;
+      transition: opacity var(--transition-duration) ease, transform var(--transition-duration) ease;
+    }
+
+    /* base gray line */
+    .timeline-shell::before {
+      z-index: 1; /* keep base lower so the colored overlay can sit above it */
+      opacity: 0.9;
+      background: linear-gradient(
+        to bottom,
+        rgba(255,255,255,0) 0%,
+        rgba(0,0,0,0.08) 10%,
+        rgba(0,0,0,0.14) 20%,
+        rgba(0,0,0,0.14) 80%,
+        rgba(0,0,0,0.08) 90%,
+        rgba(255,255,255,0) 100%
+      );
+    }
+
+    /* colored overlay - hidden by default, slides in on hover along Y axis */
+    .timeline-shell::after {
+      z-index: 3; /* sit above the base line but not above everything else */
+      opacity: 0;
+      transform: translateY(-10%);
+      background: linear-gradient(
+        to bottom,
+        rgba(255,255,255,0) 0%,
+        var(--timeline-color) 12%,
+        var(--timeline-color) 88%,
+        rgba(255,255,255,0) 100%
+      );
+    }
+
+    .timeline-shell:hover::after {
+      opacity: 1;
+      transform: translateY(0%);
+    }
+
+    .timeline-shell:hover .timeline-date {
+      color: var(--timeline-color);
+    }
+  }
+</style>
+
+<style>
+  /* small utility classes to map to the --timeline-color variable */
+  .timeline-zinc { --timeline-color: #666; }
+  .timeline-black { --timeline-color: #000; }
+  .timeline-red { --timeline-color: #ef4444; }
+  .timeline-yellow { --timeline-color: #f59e0b; }
+  .timeline-green { --timeline-color: #107d58; }
+  .timeline-blue { --timeline-color: #2563eb; }
+  /* gap utilities for the dashed timeline */
+  .timeline-gap-none { --border-gap: 0px; }
+  .timeline-gap-sm { --border-gap: calc(var(--border-width) * 1); }
+  .timeline-gap-md { --border-gap: calc(var(--border-width) * 3); }
+  .timeline-gap-lg { --border-gap: calc(var(--border-width) * 6); }
+</style>
+  
