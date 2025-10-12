@@ -1,5 +1,4 @@
 ---
-import { Button } from "@/lib/components/ui/button";
 import { ExternalLink } from "lucide-astro";
 
 const experiences = [
@@ -45,13 +44,15 @@ const experiences = [
       Work Experiences
     </h2>
 
-    <Button
-      variant="link"
-      className="px-0 flex text-sm ms-auto sm:ms-0 text-blue-600"
+    <a
+      href="https://github.com/everurstruly?tab=repositories"
+      class="px-0 flex gap-x-1 mt-4 text-sm ms-auto hover:underline underline-offset-2 mastermind_jumpscare"
+      target="_blank"
+      rel="noopener noreferrer"
     >
-      Download My Resume
-      <ExternalLink />
-    </Button>
+      {`Download My Resume {Soon}`}
+      <ExternalLink class="size-4 stroke-current" />
+    </a>
   </header>
 
   <div class="flex flex-col *:py-10">

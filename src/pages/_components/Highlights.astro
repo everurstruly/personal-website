@@ -1,5 +1,4 @@
 ---
-import { Button } from "@/lib/components/ui/button";
 import { ExternalLink } from "lucide-astro";
 
 const highlights = [
@@ -76,19 +75,15 @@ const tints = ["red", "green", "yellow", "blue"];
       Featured Projects
     </h2>
 
-    <!-- <button
-      class="text-nowrap self-end ms-auto text-sm underline text-blue-600 py-1 px-2"
+    <a
+      href="https://github.com/everurstruly?tab=repositories"
+      class="px-0 flex gap-x-1 mt-4 text-sm sm:ms-auto hover:underline underline-offset-2"
+      target="_blank"
+      rel="noopener noreferrer"
     >
       View Archive
-    </button> -->
-
-    <Button
-      variant="link"
-      className="px-0 flex mt-4 text-sm sm:ms-auto text-blue-600"
-    >
-      View Archive
-      <ExternalLink />
-    </Button>
+      <ExternalLink class="size-4 stroke-current" />
+    </a>
   </header>
 
   <div class="flex flex-wrap gap-y-20 gap-x-8 lg:gap-x-12 lg:gap-y-20">
