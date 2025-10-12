@@ -24,13 +24,13 @@ const props = Astro.props;
 
     <div
       id="sidebar-bg-tint"
-      class="absolute inset-0 bg-green-500/15 z-20 pointer-events-none"
+      class="absolute inset-0 bg-green-500/10 z-20 pointer-events-none"
     >
     </div>
 
     <div
       id="sidebar-bg-idle"
-      class="absolute inset-0 bg-amber-50 z-50 pointer-events-auto"
+      class="absolute inset-0 bg-stone-100 z-50 pointer-events-auto"
     >
     </div>
   </div>
@@ -124,11 +124,12 @@ const props = Astro.props;
 
   #sidebar-bg {
     /* control sidebar layer transitions explicitly to ensure instant show and fast fade-out */
-    --transition-duration: 300ms; /* default fade-out duration */
+    --transition-duration: 200ms; /* default fade-out duration */
     --transition-ease: cubic-bezier(0.2, 0.9, 0.2, 1);
     --sidebar-transition: opacity var(--transition-duration)
       var(--transition-ease);
   }
+
   /* ensure transitions are always present on the layers so they animate both in and out */
   #sidebar-bg-photo,
   #sidebar-bg-tint,
@@ -147,11 +148,15 @@ const props = Astro.props;
   }
 
   /* when .reveal is present, show ghost photo + tint instantly (no fade-in) */
-  #sidebar-bg.reveal #sidebar-bg-photo,
+  #sidebar-bg.reveal #sidebar-bg-photo {
+    transition-duration: 0ms !important; /* show instantly */
+    opacity: 0.85;
+  }
   #sidebar-bg.reveal #sidebar-bg-tint {
     transition-duration: 0ms !important; /* show instantly */
     opacity: 1;
   }
+
   /* idle should hide using the standard fast fade-out */
   #sidebar-bg.reveal #sidebar-bg-idle {
     opacity: 0;
@@ -168,7 +173,7 @@ const props = Astro.props;
     createContainers: true,
     hideOverflow: false,
     timing: {
-      duration: 2000,
+      duration: 1500,
       iterations: 1,
     },
     glitchTimeSpan: {
