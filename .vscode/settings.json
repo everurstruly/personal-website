@@ -14,5 +14,6 @@
     "editor.defaultFormatter": "astro-build.astro-vscode"
   },
   "typescript.preferences.quoteStyle": "double",
-  "javascript.preferences.quoteStyle": "double"
+  "javascript.preferences.quoteStyle": "double",
+  "cSpell.enabled": false
 }
