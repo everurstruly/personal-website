@@ -46,3 +46,18 @@ import { socialLinks, website } from "../seo";
     </Button>
   </div>
 </section>
+
+<style>
+  /* make anchor scrolling land below mobile topbars: 4rem on small screens, keep desktop spacing at lg */
+  #summary {
+    scroll-margin-top: 20rem;
+  }
+
+  @media screen and (min-width: 1024px) {
+    /* desktop: respect original padding (pt-14 = 3.5rem) */
+    #summary {
+      /* revert to the default behaviour on desktop so we don't hardcode a size */
+      scroll-margin-top: revert;
+    }
+  }
+</style>
