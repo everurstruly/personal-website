@@ -1,7 +1,9 @@
 ---
-import { Accordion } from "@components/Accordion";
+import { ChevronDown, ExternalLink } from "lucide-astro";
+import { website } from "../seo";
 ---
 
+<!-- Data written directly in markup for maximum flexibility (no frontmatter) -->
 <section
   class="pt-16 pb-16 lg:flex lg:items-start lg:gap-x-20"
   id="collaborate"
@@ -10,42 +12,214 @@ import { Accordion } from "@components/Accordion";
     class="lg:max-w-xs mb-8 lg:mb-8 flex items-center gap-x-4 justify-between lg:flex-col lg:items-start lg:gap-y-2 lg:sticky lg:top-28 lg:h-full lg:shrink-0"
   >
     <h2 class="text-lg sm:text-2xl lg:text-2xl text-balance text-zinc-900 mb-4">
-      Lets Create Something Amazing Together
+      Lets Built Together! Worst case scenario? We only have a great
+      conversation.
     </h2>
 
-    <!-- <button class="text-sm underline text-blue-600 py-2"> Email </button> -->
+    <a
+      href={`mailto:${website.email}`}
+      class="px-0 flex gap-x-1 mt-4 text-sm hover:underline underline-offset-2 mastermind_jumpscare"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      {`Write me an email`}
+      <ExternalLink class="size-4 stroke-current" />
+    </a>
   </header>
 
-  <div class="grow">
-    <Accordion
-      client:idle
-      data={[
-        {
-          title: "What services do you offer?",
-          content:
-            "I offer a range of services including web development, mobile app development, UI/UX design, and consulting. I specialize in creating responsive and user-friendly applications tailored to your needs.",
-        },
-        {
-          title: "What is your development process?",
-          content:
-            "My development process typically involves initial consultation, requirement gathering, design and prototyping, development, testing, and deployment. I ensure to keep you involved at every stage to ensure the final product meets your expectations.",
-        },
-        {
-          title: "How do you handle project timelines?",
-          content:
-            "I believe in transparent communication and realistic timelines. After understanding the project scope, I provide a detailed timeline and keep you updated on progress regularly. I also build in buffer time for unforeseen challenges.",
-        },
-        {
-          title: "What technologies do you specialize in?",
-          content:
-            "I specialize in a variety of technologies including JavaScript, React, Node.js, Python, and more. I stay updated with the latest trends and tools to ensure that I can provide the best solutions for your projects.",
-        },
-        {
-          title: "How can I get started?",
-          content:
-            "Getting started is easy! You can reach out to me via email or through my contact form on the website. We can schedule a consultation to discuss your project requirements and how I can help bring your vision to life.",
-        },
-      ]}
-    />
+  <div id="collaboration-faq" class="grow accordion-container">
+    <div class="ac">
+      <h4 class="ac-header">
+        <button
+          type="button"
+          class="ac-trigger !text-sm !font-medium sm:!text-base"
+        >
+          How do I get in touch?
+          <ChevronDown
+            class="h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-200"
+          />
+        </button>
+      </h4>
+      <div class="ac-panel !text-base" role="region">
+        <p class="text-sm sm:text-base font-sans">
+          Just send a message via my <a href="#" class="underline">socials</a>.
+          Tell me what you're trying to build or fix. No corporate nonsense — if
+          it’s a good fit, we’ll talk. If not, I’ll point you in the right
+          direction.
+        </p>
+      </div>
+    </div>
+
+    <div class="ac">
+      <h4 class="ac-header">
+        <button
+          type="button"
+          class="ac-trigger !text-sm !font-medium sm:!text-base"
+        >
+          What services do you offer?
+          <ChevronDown
+            class="h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-200"
+          />
+        </button>
+      </h4>
+      <div class="ac-panel !text-base" role="region">
+        <p class="text-sm sm:text-base font-sans">
+          I solve problems with software. Most of my work sits in web apps,
+          dashboards, internal tools, automation and platform infrastructure. If
+          you have a process that’s manual, inefficient, or non-existent — I can
+          design and build the system to handle it.
+        </p>
+      </div>
+    </div>
+
+    <div class="ac">
+      <h4 class="ac-header">
+        <button
+          type="button"
+          class="ac-trigger !text-sm !font-medium sm:!text-base"
+        >
+          Do you only build websites and frontend?
+          <ChevronDown
+            class="h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-200"
+          />
+        </button>
+      </h4>
+      <div class="ac-panel !text-base" role="region">
+        <p class="text-sm sm:text-base font-sans">
+          No — I build products, not just pages. I work on anything from landing
+          pages to full platforms with authentication, databases, payments,
+          messaging or real-time features. If it runs in the browser or on a
+          server, I can make it.
+        </p>
+      </div>
+    </div>
+
+    <div class="ac">
+      <h4 class="ac-header">
+        <button
+          type="button"
+          class="ac-trigger !text-sm !font-medium sm:!text-base"
+        >
+          How do projects with you usually work?
+          <ChevronDown
+            class="h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-200"
+          />
+        </button>
+      </h4>
+      <div class="ac-panel !text-base" role="region">
+        <p class="text-sm sm:text-base font-sans">
+          You tell me what problem you're trying to solve. We define the core
+          outcome, strip out the noise, and I propose the fastest path to
+          execution. Depending on the project, I’ll either work independently or
+          closely with you in short feedback loops.
+        </p>
+      </div>
+    </div>
+
+    <div class="ac">
+      <h4 class="ac-header">
+        <button
+          type="button"
+          class="ac-trigger !text-sm !font-medium sm:!text-base"
+        >
+          What technologies do you specialize in?
+          <ChevronDown
+            class="h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-200"
+          />
+        </button>
+      </h4>
+      <div class="ac-panel !text-base" role="region">
+        <p class="text-sm sm:text-base font-sans">
+          Modern JavaScript (Next.js, React, Node.js) for most builds. I also
+          use databases like Postgres or MongoDB depending on the use case. Even
+          Copilot AI! I’m flexible — tech is a tool, not a religion.
+        </p>
+      </div>
+    </div>
+
+    <div class="ac">
+      <h4 class="ac-header">
+        <button
+          type="button"
+          class="ac-trigger !text-sm !font-medium sm:!text-base"
+        >
+          I'm not technical. Is that a problem?
+          <ChevronDown
+            class="h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-200"
+          />
+        </button>
+      </h4>
+      <div class="ac-panel !text-base" role="region">
+        <p class="text-sm sm:text-base font-sans">
+          Nope. Your job is to explain the goal in plain language. My job is to
+          translate it into logic, features, and delivery. If you’re technical,
+          great — we speak code. If not, I’ll keep it simple.
+        </p>
+      </div>
+    </div>
   </div>
 </section>
+
+<style>
+  #collaboration-faq .ac-trigger {
+    border: none;
+    background: none;
+    display: flex;
+    flex: 1;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    transition: all 0.2s;
+    text-align: start;
+    cursor: pointer;
+    width: 100%;
+  }
+
+  #collaboration-faq .ac-trigger:focus,
+  #collaboration-faq .ac-trigger:hover {
+    color: inherit;
+    text-decoration: underline;
+  }
+
+  #collaboration-faq .ac-trigger::after {
+    content: "";
+    display: none;
+  }
+
+  #collaboration-faq .ac-trigger[aria-expanded="true"] svg {
+    transform: rotate(180deg);
+  }
+
+  #collaboration-faq .ac-content {
+    overflow: hidden;
+    animation-duration: 0.2s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+    padding-inline: 0px;
+  }
+
+  #collaboration-faq .ac-panel > *:last-child {
+    margin-bottom: 1.5rem;
+  }
+
+  #collaboration-faq .ac-content[data-state="open"] {
+    animation-name: accordion-down;
+  }
+
+  #collaboration-faq .ac {
+    border: none;
+    border-bottom: 1px solid var(--border-color, #e5e7eb);
+  }
+</style>
+
+<script>
+  import Accordion from "accordion-js";
+  import "accordion-js/dist/accordion.min.css";
+
+  new Accordion("#collaboration-faq", {
+    duration: 300,
+    showMultiple: false,
+    collapse: true,
+    openOnInit: [0],
+  });
+</script>

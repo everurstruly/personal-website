@@ -53,6 +53,9 @@ importers:
       '@typescript-eslint/parser':
         specifier: ^7.3.1
         version: 7.18.0(eslint@8.57.1)(typescript@5.9.3)
+      accordion-js:
+        specifier: ^3.4.1
+        version: 3.4.1
       class-variance-authority:
         specifier: ^0.7.1
         version: 0.7.1
@@ -1211,6 +1214,9 @@ packages:
 
   '@vscode/l10n@0.0.18':
     resolution: {integrity: sha512-KYSIHVmslkaCDyw013pphY+d7x1qV8IZupYfeIfzNA+nsaWHbn5uPuQRvdRFsa9zFzGeudPuoGoZ1Op4jrJXIQ==}
+
+  accordion-js@3.4.1:
+    resolution: {integrity: sha512-jPXDsRsulM3rwqgeTtAD9JCFYBD3Fl4MIHcHcj7UvCTwbgn/wD1Gi78gSb11rwTxOhylHMOM5QpoPKn+Ex2TKA==}
 
   acorn-jsx@5.3.2:
     resolution: {integrity: sha512-rq9s+JNhf0IChjtDXxllJ7g41oZk5SlXtp0LHwyA5cejwn7vKmKp4pPri6YEePv2PU65sAsegbXtIinmDFDXgQ==}
@@ -4780,6 +4786,8 @@ snapshots:
       vscode-uri: 3.1.0
 
   '@vscode/l10n@0.0.18': {}
+
+  accordion-js@3.4.1: {}
 
   acorn-jsx@5.3.2(acorn@8.15.0):
     dependencies:
