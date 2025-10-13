@@ -1,6 +1,18 @@
+---
+import { ArrowUp } from "lucide-astro";
+
+type Props = {
+  classList?: string;
+};
+
+const classList = Astro.props.classList ?? "";
+---
+
 <button
   id="back-to-top"
-  class="relative group w-fit flex py-1.5 flex-nowrap transition-colors duration-300 ease-in-out"
+  class={`text-sm relative group w-fit flex py-1.5 flex-nowrap transition-colors duration-300 ease-in-out ${classList}`}
 >
-  <span class="text-sm">Back to the Top </span>
+  Scroll to the Top <ArrowUp
+    class="size-4 ml-1.5 translate-y-[4px] group-hover:translate-y-[-3px] transition-transform duration-300 ease-in-out"
+  />
 </button>
