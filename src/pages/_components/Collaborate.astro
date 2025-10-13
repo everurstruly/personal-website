@@ -9,10 +9,10 @@ import { website } from "../seo";
   id="collaborate"
 >
   <header
-    class="lg:max-w-xs mb-16 lg:mb-8 flex flex-wrap items-center gap-x-4 justify-between lg:flex-col lg:items-start lg:gap-y-2 lg:sticky lg:top-28 lg:h-full lg:shrink-0 ms-auto"
+    class="mb-16 flex flex-wrap items-center gap-x-4 gap-y-4 justify-between lg:flex-col lg:items-start"
   >
-    <h2 class="text-lg sm:text-2xl lg:text-2xl text-balance text-zinc-900 mb-4">
-      Lets Built Together! Worst case scenario? We only have a great
+    <h2 class="text-lg sm:text-2xl lg:text-3xl text-balance !leading-[1.54]">
+      Lets Built Together! Worst case scenario, we only have a great
       conversation.
     </h2>
 
@@ -27,21 +27,18 @@ import { website } from "../seo";
     </a>
   </header>
 
-  <div id="collaboration-faq" class="grow accordion-container">
+  <div id="collaboration-faq" class="grow accordion-container lg:max-w-md">
     <div class="ac">
       <h4 class="ac-header">
-        <button
-          type="button"
-          class="ac-trigger !text-sm !font-medium sm:!text-base"
-        >
+        <button type="button" class="ac-trigger">
           How do I get in touch?
           <ChevronDown
             class="h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-200"
           />
         </button>
       </h4>
-      <div class="ac-panel !text-base" role="region">
-        <p class="text-sm sm:text-base font-sans">
+      <div class="ac-panel" role="region">
+        <p>
           Just send a message via my <a href="#" class="underline">socials</a>.
           Tell me what you're trying to build or fix. No corporate nonsense — if
           it’s a good fit, we’ll talk. If not, I’ll point you in the right
@@ -52,18 +49,15 @@ import { website } from "../seo";
 
     <div class="ac">
       <h4 class="ac-header">
-        <button
-          type="button"
-          class="ac-trigger !text-sm !font-medium sm:!text-base"
-        >
+        <button type="button" class="ac-trigger">
           What services do you offer?
           <ChevronDown
             class="h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-200"
           />
         </button>
       </h4>
-      <div class="ac-panel !text-base" role="region">
-        <p class="text-sm sm:text-base font-sans">
+      <div class="ac-panel" role="region">
+        <p>
           I solve problems with software. Most of my work sits in web apps,
           dashboards, internal tools, automation and platform infrastructure. If
           you have a process that’s manual, inefficient, or non-existent — I can
@@ -74,18 +68,15 @@ import { website } from "../seo";
 
     <div class="ac">
       <h4 class="ac-header">
-        <button
-          type="button"
-          class="ac-trigger !text-sm !font-medium sm:!text-base"
-        >
+        <button type="button" class="ac-trigger">
           Do you only build websites and frontend?
           <ChevronDown
             class="h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-200"
           />
         </button>
       </h4>
-      <div class="ac-panel !text-base" role="region">
-        <p class="text-sm sm:text-base font-sans">
+      <div class="ac-panel" role="region">
+        <p>
           No — I build products, not just pages. I work on anything from landing
           pages to full platforms with authentication, databases, payments,
           messaging or real-time features. If it runs in the browser or on a
@@ -96,18 +87,15 @@ import { website } from "../seo";
 
     <div class="ac">
       <h4 class="ac-header">
-        <button
-          type="button"
-          class="ac-trigger !text-sm !font-medium sm:!text-base"
-        >
+        <button type="button" class="ac-trigger">
           How do projects with you usually work?
           <ChevronDown
             class="h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-200"
           />
         </button>
       </h4>
-      <div class="ac-panel !text-base" role="region">
-        <p class="text-sm sm:text-base font-sans">
+      <div class="ac-panel" role="region">
+        <p>
           You tell me what problem you're trying to solve. We define the core
           outcome, strip out the noise, and I propose the fastest path to
           execution. Depending on the project, I’ll either work independently or
@@ -118,18 +106,15 @@ import { website } from "../seo";
 
     <div class="ac">
       <h4 class="ac-header">
-        <button
-          type="button"
-          class="ac-trigger !text-sm !font-medium sm:!text-base"
-        >
+        <button type="button" class="ac-trigger">
           What technologies do you specialize in?
           <ChevronDown
             class="h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-200"
           />
         </button>
       </h4>
-      <div class="ac-panel !text-base" role="region">
-        <p class="text-sm sm:text-base font-sans">
+      <div class="ac-panel" role="region">
+        <p>
           Modern JavaScript (Next.js, React, Node.js) for most builds. I also
           use databases like Postgres or MongoDB depending on the use case. Even
           Copilot AI! I’m flexible — tech is a tool, not a religion.
@@ -139,18 +124,15 @@ import { website } from "../seo";
 
     <div class="ac">
       <h4 class="ac-header">
-        <button
-          type="button"
-          class="ac-trigger !text-sm !font-medium sm:!text-base"
-        >
+        <button type="button" class="ac-trigger">
           I'm not technical. Is that a problem?
           <ChevronDown
             class="h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-200"
           />
         </button>
       </h4>
-      <div class="ac-panel !text-base" role="region">
-        <p class="text-sm sm:text-base font-sans">
+      <div class="ac-panel" role="region">
+        <p>
           Nope. Your job is to explain the goal in plain language. My job is to
           translate it into logic, features, and delivery. If you’re technical,
           great — we speak code. If not, I’ll keep it simple.
@@ -161,9 +143,14 @@ import { website } from "../seo";
 </section>
 
 <style>
+  #collaboration-faq .ac-container,
+  #collaboration-faq .ac,
+  #collaboration-faq .ac-trigger {
+    background: transparent;
+  }
+
   #collaboration-faq .ac-trigger {
     border: none;
-    background: none;
     display: flex;
     flex: 1;
     justify-content: space-between;
@@ -172,7 +159,7 @@ import { website } from "../seo";
     transition: all 0.2s;
     text-align: start;
     cursor: pointer;
-    width: 100%;
+    @apply text-foreground text-base font-medium sm:text-lg;
   }
 
   #collaboration-faq .ac-trigger:focus,
@@ -198,6 +185,13 @@ import { website } from "../seo";
     padding-inline: 0px;
   }
 
+  #collaboration-faq .ac-panel {
+    @apply font-sans !text-sm;
+  }
+
+  #collaboration-faq .ac-panel > *:first-child {
+    margin-top: 1rem;
+  }
   #collaboration-faq .ac-panel > *:last-child {
     margin-bottom: 1.5rem;
   }
@@ -207,8 +201,7 @@ import { website } from "../seo";
   }
 
   #collaboration-faq .ac {
-    border: none;
-    border-bottom: 1px solid var(--border-color, #e5e7eb);
+    @apply border-x-transparent border-t-transparent border-b border-b-muted-foreground/15;
   }
 </style>
 

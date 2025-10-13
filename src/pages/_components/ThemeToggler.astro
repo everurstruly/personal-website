@@ -78,7 +78,19 @@
 </div>
 
 <script>
-  export function toggleTheme(dark: boolean) {
+  function preloadTheme() {
+    const userTheme = localStorage.theme;
+
+    if (userTheme === "light" || userTheme === "dark") {
+      const isDark = userTheme === "dark";
+      toggleTheme({ isDark });
+    } else {
+      const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      toggleTheme({ isDark });
+    }
+  }
+
+  function toggleTheme({ isDark }: { isDark: boolean }) {
     const css = document.createElement("style");
     const html = document.getElementsByTagName("html")[0];
 
@@ -97,7 +109,7 @@
 
     document.head.appendChild(css);
 
-    if (dark) {
+    if (isDark) {
       document.documentElement.classList.add("dark");
       html.classList.add("dark");
     } else {
@@ -112,28 +124,31 @@
   const lightThemeButton = document.getElementById("light-theme-button");
   lightThemeButton?.addEventListener("click", () => {
     localStorage.setItem("theme", "light");
-    toggleTheme(false);
+    toggleTheme({ isDark: false });
   });
 
   const darkThemeButton = document.getElementById("dark-theme-button");
   darkThemeButton?.addEventListener("click", () => {
     localStorage.setItem("theme", "dark");
-    toggleTheme(true);
+    toggleTheme({ isDark: true });
   });
 
   const systemThemeButton = document.getElementById("system-theme-button");
   systemThemeButton?.addEventListener("click", () => {
     localStorage.setItem("theme", "system");
-    toggleTheme(window.matchMedia("(prefers-color-scheme: dark)").matches);
+    const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    toggleTheme({ isDark });
   });
 
-  export function preloadTheme() {
-    const userTheme = localStorage.theme;
+  window
+    .matchMedia("(prefers-color-scheme: dark)")
+    .addEventListener("change", (event) => {
+      if (localStorage.theme === "system" || !localStorage.theme) {
+        toggleTheme({ isDark: event.matches });
+      }
+    });
 
-    if (userTheme === "light" || userTheme === "dark") {
-      toggleTheme(userTheme === "dark");
-    } else {
-      toggleTheme(window.matchMedia("(prefers-color-scheme: dark)").matches);
-    }
-  }
+  document.addEventListener("DOMContentLoaded", () => {
+    preloadTheme();
+  });
 </script>

@@ -91,18 +91,17 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   );
 </script>
 
-<script is:inline>
-  // import {
-  //   toggleTheme,
-  //   preloadTheme,
-  // } from "@pages/_components/ThemeToggler.astro";
-
+<script>
   function doRevealAnimation() {
     const animateElements = document.querySelectorAll(".animate");
     const revealElementsViaOpacity =
       document.querySelectorAll(".reveal-opacity");
 
+    console.log("animateEls: ", animateElements);
+
     animateElements.forEach((element, index) => {
+      console.log("animating", element, "at", index);
+
       setTimeout(() => {
         element.classList.add("show");
       }, index * 50);
@@ -123,7 +122,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     }
   }
 
-  function scrollToTop(event) {
+  function scrollToTop(event: Event) {
     event.preventDefault();
     window.scrollTo({
       top: 0,
@@ -132,7 +131,6 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   }
 
   function init() {
-    // preloadTheme();
     notifyOnScroll();
     doRevealAnimation();
 
@@ -142,18 +140,9 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     const backToPrev = document.getElementById("back-to-prev");
     backToPrev?.addEventListener("click", () => window.history.back());
 
-    // window
-    //   .matchMedia("(prefers-color-scheme: dark)")
-    //   .addEventListener("change", (event) => {
-    //     if (localStorage.theme === "system" || !localStorage.theme) {
-    //       toggleTheme(event.matches);
-    //     }
-    //   });
-
     document.addEventListener("scroll", notifyOnScroll);
   }
 
   document.addEventListener("DOMContentLoaded", () => init());
   document.addEventListener("astro:after-swap", () => init());
-  // preloadTheme();
 </script>
