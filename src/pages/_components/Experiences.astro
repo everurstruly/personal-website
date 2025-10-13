@@ -64,30 +64,30 @@ const experiences = [
           class={`relative w-full lg:max-w-3xl grow timeline-shell timeline-black`}
         >
           {/* <!-- scalable decorative wrapper (folder-like) -->
-        <svg
-          class="absolute inset-0 w-full h-full pointer-events-none"
-          viewBox="0 0 600 400"
-          preserveAspectRatio="none"
-          xmlns="http://www.w3.org/2000/svg"
-          aria-hidden="true"
-        >
-          <path
-            d="M20 90 H160 L210 50 H580 A18 18 0 0 1 598 68 V342 A18 18 0 0 1 580 360 H20 A18 18 0 0 1 2 342 V108 A18 18 0 0 1 20 90 Z"
-            fill="none"
-            stroke="rgba(0,0,0,0.02)"
-            stroke-width="4"
-            stroke-linejoin="round"
-          />
-        </svg> */}
+          <svg
+            class="absolute inset-0 w-full h-full pointer-events-none"
+            viewBox="0 0 600 400"
+            preserveAspectRatio="none"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+          >
+            <path
+              d="M20 90 H160 L210 50 H580 A18 18 0 0 1 598 68 V342 A18 18 0 0 1 580 360 H20 A18 18 0 0 1 2 342 V108 A18 18 0 0 1 20 90 Z"
+              fill="none"
+              stroke="rgba(0,0,0,0.02)"
+              stroke-width="4"
+              stroke-linejoin="round"
+            />
+          </svg> */}
 
           <div class="lg:flex items-start">
-            <div class="shrink-0 lg:w-[var(--timeline-col-width)] lg:pe-10 lg:text-end">
+            <div class="shrink-0 lg:w-[var(--timeline-col-width)] lg:pe-16 lg:text-end">
               <span class="lg:mt-4 text-xs lg:text-sm font-mono mb-6 capitalize lg:text-nowrap timeline-date">
                 {work.date?.[0]} — {work.date?.[1]}
               </span>
             </div>
 
-            <div class="lg:ps-10">
+            <div class="lg:ps-14 lg:mt-4">
               <header class="mb-2">
                 <h4 class="text-base sm:text-lg lg:text-xl__">
                   <span class="font-semibold">{work.role}</span> at{" "}
@@ -97,7 +97,7 @@ const experiences = [
                 </h4>
               </header>
               <p class="text-sm lg:text-base mb-3">{work.contribution}</p>
-              <ul class="text-xs font-medium py-1 flex flex-wrap gap-2">
+              <ul class="text-xs lg:text-base font-medium py-1 flex flex-wrap gap-2 gap-y-0">
                 {work.tech?.map((tech, i, arr) => (
                   <li class="text-zinc-600 py-1">
                     {tech}
@@ -118,10 +118,10 @@ const experiences = [
     .timeline-shell {
       --border-width: 1px; /* thickness of the dashed line */
       --border-height: 1px; /* thickness of the dashed line */
-      --timeline-col-width: 16rem; /* matches Tailwind lg:w-52 (13rem / 208px) */
+      --timeline-col-width: 15rem; /* matches Tailwind lg:w-52 (13rem / 208px) */
       --transition-duration: 700ms;
       --border-gap: calc(
-        var(--border-width) * 0
+        var(--border-width) * 4
       ); /* default gap between dash segments */
     }
 
@@ -218,10 +218,10 @@ const experiences = [
       transform: translateY(-10%);
       background: linear-gradient(
         to bottom,
-        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.5) 0%,
         var(--timeline-color) 12%,
         var(--timeline-color) 88%,
-        rgba(255, 255, 255, 0) 100%
+        rgba(255, 255, 255, 0.5) 100%
       );
     }
 
