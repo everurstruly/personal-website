@@ -6,7 +6,7 @@
   <button
     id="light-theme-button"
     aria-label="Light theme"
-    class="group size-8 flex items-center justify-center rounded-full"
+    class="theme-button group size-8 flex items-center justify-center rounded-full"
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -18,7 +18,7 @@
       stroke-width="1.5"
       stroke-linecap="round"
       stroke-linejoin="round"
-      class="group-hover:stroke-black stroke-neutral-600 transition-colors duration-300 ease-in-out"
+      class="group-hover:stroke-black dark:group-hover:stroke-zinc-200 stroke-neutral-600 transition-colors duration-300 ease-in-out"
     >
       <circle cx="12" cy="12" r="5"></circle>
       <line x1="12" y1="1" x2="12" y2="3"></line>
@@ -35,7 +35,7 @@
   <button
     id="dark-theme-button"
     aria-label="Dark theme"
-    class="group size-8 flex items-center justify-center rounded-full"
+    class="theme-button group size-8 flex items-center justify-center rounded-full"
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -47,7 +47,7 @@
       stroke-width="1.5"
       stroke-linecap="round"
       stroke-linejoin="round"
-      class="group-hover:stroke-black stroke-neutral-600 transition-colors duration-300 ease-in-out"
+      class="group-hover:stroke-black dark:group-hover:stroke-zinc-200 stroke-neutral-600 transition-colors duration-300 ease-in-out"
     >
       <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
     </svg>
@@ -56,7 +56,7 @@
   <button
     id="system-theme-button"
     aria-label="System theme"
-    class="group size-8 flex items-center justify-center rounded-full"
+    class="theme-button group size-8 flex items-center justify-center rounded-full"
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -68,7 +68,7 @@
       stroke-width="1.5"
       stroke-linecap="round"
       stroke-linejoin="round"
-      class="group-hover:stroke-black stroke-neutral-600 transition-colors duration-300 ease-in-out"
+      class="group-hover:stroke-black dark:group-hover:stroke-zinc-200 stroke-neutral-600 transition-colors duration-300 ease-in-out"
     >
       <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
       <line x1="8" y1="21" x2="16" y2="21"></line>
@@ -76,6 +76,18 @@
     </svg>
   </button>
 </div>
+
+<style>
+  html:not([data-theme="system"]):not(.dark) #light-theme-button svg,
+  html:not([data-theme="system"]).dark #dark-theme-button svg,
+  html[data-theme="system"] #system-theme-button svg {
+    stroke: dodgerblue;
+  }
+  :not(html[data-theme="system"]) && :not(html.dark) #light-theme-button svg,
+  html[data-theme="system"] #system-theme-button svg {
+    stroke: dodgerblue;
+  }
+</style>
 
 <script>
   function preloadTheme() {
@@ -121,20 +133,25 @@
     document.head.removeChild(css);
   }
 
+  const html = document.getElementsByTagName("html")[0];
+
   const lightThemeButton = document.getElementById("light-theme-button");
   lightThemeButton?.addEventListener("click", () => {
+    html.setAttribute("data-theme", "light");
     localStorage.setItem("theme", "light");
     toggleTheme({ isDark: false });
   });
 
   const darkThemeButton = document.getElementById("dark-theme-button");
   darkThemeButton?.addEventListener("click", () => {
+    html.setAttribute("data-theme", "dark");
     localStorage.setItem("theme", "dark");
     toggleTheme({ isDark: true });
   });
 
   const systemThemeButton = document.getElementById("system-theme-button");
   systemThemeButton?.addEventListener("click", () => {
+    html.setAttribute("data-theme", "system");
     localStorage.setItem("theme", "system");
     const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
     toggleTheme({ isDark });
@@ -144,7 +161,9 @@
     .matchMedia("(prefers-color-scheme: dark)")
     .addEventListener("change", (event) => {
       if (localStorage.theme === "system" || !localStorage.theme) {
-        toggleTheme({ isDark: event.matches });
+        const isDark = event.matches;
+        toggleTheme({ isDark });
+        html.setAttribute("data-theme", "system");
       }
     });
 
