@@ -79,7 +79,7 @@ const tints = ["red", "green", "yellow", "blue"];
 
     <a
       href="https://github.com/everurstruly?tab=repositories"
-      class="px-0 flex gap-x-1 mt-4 text-sm sm:ms-auto hover:underline underline-offset-2"
+      class="px-0 flex gap-x-1 mt-4 text-sm sm:ms-auto hover:underline underline-offset-2 text-blue-600"
       target="_blank"
       rel="noopener noreferrer"
     >
@@ -121,7 +121,7 @@ const tints = ["red", "green", "yellow", "blue"];
                 <span class="text-sm">{project.date}</span>
               </div>
 
-              <p class="text-sm sm:text-base text-zinc-600">
+              <p class="text-sm sm:text-base text-zinc-600 dark:text-zinc-400">
                 {project.description} <span class="font-semibold">Build:</span>{" "}
                 {project.tech.map((tag, index, arr) => {
                   const prefix = index === 0 ? "" : ", ";

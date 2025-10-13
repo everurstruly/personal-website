@@ -1,5 +1,5 @@
 ---
-import { navMenuList } from "../index.astro";
+import { navMenuList } from "@pages/index.astro";
 import MainContainer from "./MainContainer.astro";
 ---
 
@@ -14,12 +14,14 @@ import MainContainer from "./MainContainer.astro";
             <>
               <a
                 href={item.href}
-                class="h-full inline-flex items-center gap-x-1 px-1 min-[340px]:px-0"
+                class="h-full inline-flex items-center gap-x-1 px-0.5 min-[340px]:px-0"
               >
-                <span class="text-sm font-medium font-mono">{item.title}</span>
+                <span class="text-xs min-[340px]:text-sm font-medium font-mono">
+                  {item.title}
+                </span>
               </a>
               {index < arr.length - 1 && (
-                <span class="text-xs font-sans italic opacity-90">//</span>
+                <span class="text-xs font-sans italic">//</span>
               )}
             </>
           );

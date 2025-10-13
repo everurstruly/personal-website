@@ -5,20 +5,20 @@ import { website } from "../seo";
 
 <!-- Data written directly in markup for maximum flexibility (no frontmatter) -->
 <section
-  class="pt-16 pb-16 lg:flex lg:items-start lg:gap-x-20"
+  class="pt-16 pb-16 lg:flex lg:items-start lg:gap-x-16"
   id="collaborate"
 >
   <header
     class="mb-16 flex flex-wrap items-center gap-x-4 gap-y-4 justify-between lg:flex-col lg:items-start"
   >
-    <h2 class="text-lg sm:text-2xl lg:text-3xl text-balance !leading-[1.54]">
+    <h2 class="text-4xl text-balance">
       Lets Built Together! Worst case scenario, we only have a great
       conversation.
     </h2>
 
     <a
       href={`mailto:${website.email}`}
-      class="px-0 flex gap-x-1 mt-4 text-sm hover:underline underline-offset-2 text-nowrap"
+      class="px-0 flex gap-x-1 mt-4 text-sm hover:underline underline-offset-2 text-nowrap text-blue-600"
       target="_blank"
       rel="noopener noreferrer"
     >
@@ -149,13 +149,17 @@ import { website } from "../seo";
     background: transparent;
   }
 
+  #collaboration-faq .ac {
+    margin-bottom: 1rem;
+  }
+
   #collaboration-faq .ac-trigger {
     border: none;
     display: flex;
     flex: 1;
     justify-content: space-between;
     align-items: center;
-    padding: 0.75rem 0;
+    padding: 0.5rem 0;
     transition: all 0.2s;
     text-align: start;
     cursor: pointer;
@@ -190,10 +194,10 @@ import { website } from "../seo";
   }
 
   #collaboration-faq .ac-panel > *:first-child {
-    margin-top: 1rem;
+    margin-top: 0.75rem;
   }
   #collaboration-faq .ac-panel > *:last-child {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
   }
 
   #collaboration-faq .ac-content[data-state="open"] {

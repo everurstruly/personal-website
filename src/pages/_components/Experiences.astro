@@ -33,12 +33,9 @@ const experiences = [
 // const timelineClasses = ["timeline-red","timeline-yellow","timeline-green","timeline-blue"];
 ---
 
-<section
-  id="experiences"
-  class="pt-16 pb-20 lg:flex-row-reverse__ lg:items-start__ lg:gap-x-3"
->
+<section id="experiences" class="pt-16 pb-20 lg:gap-x-3">
   <header
-    class="mb-8 flex flex-wrap gap-y-2 items-center gap-x-4 justify-between"
+    class="mb-8 lg:mb-10 flex flex-wrap gap-y-2 items-center gap-x-4 justify-between"
   >
     <h2
       class="text-4xl font-semibold uppercase text-zinc-800 dark:text-zinc-100"
@@ -48,16 +45,16 @@ const experiences = [
 
     <a
       href="https://github.com/everurstruly?tab=repositories"
-      class="px-0 flex gap-x-1 mt-4 text-sm ms-auto hover:underline underline-offset-2 mastermind_jumpscare"
+      class="px-0 flex gap-x-1 mt-4 text-sm ms-auto hover:underline underline-offset-2 mastermind_jumpscare text-blue-600"
       target="_blank"
       rel="noopener noreferrer"
     >
-      {`Download My Resume {Soon}`}
+      {`Download Full Version Resume {Soon}`}
       <ExternalLink class="size-4 stroke-current" />
     </a>
   </header>
 
-  <div class="flex flex-col *:py-10">
+  <div class="flex flex-col *:py-10 lg:ms-10">
     {
       experiences.map((work) => (
         // <article class={`relative w-full lg:max-w-3xl grow timeline-shell ${timelineClasses[idx % timelineClasses.length]}`}>
@@ -83,25 +80,27 @@ const experiences = [
           </svg> */}
 
           <div class="lg:flex items-start">
-            <div class="shrink-0 lg:w-[var(--timeline-col-width)] lg:pe-16 lg:text-end">
-              <span class="lg:mt-4 text-xs lg:text-sm font-mono mb-6 capitalize lg:text-nowrap timeline-date">
+            <div class="shrink-0 lg:w-[var(--timeline-col-width)] lg:pe-16 lg:text-start">
+              <span class="lg:mt-4 text-xs lg:text-sm font-mono mb-6 capitalize lg:text-nowrap timeline-date text-amber-100">
                 {work.date?.[0]} — {work.date?.[1]}
               </span>
             </div>
 
-            <div class="lg:ps-14 lg:mt-4">
+            <div class="lg:ps-14 lg:mt-2">
               <header class="mb-2">
-                <h4 class="text-base sm:text-lg">
+                <h4 class="text-base sm:text-lg lg:text-xl">
                   <span class="font-semibold">{work.role}</span> at{" "}
-                  <a href="#" class="text-zinc-950 dark:text-blue-600">
+                  <a href="#" class="text-zinc-950 dark:text-amber-200">
                     {work.business}
                   </a>
                 </h4>
               </header>
-              <p class="text-sm lg:text-base mb-0">{work.contribution}</p>
-              <ul class="text-xs lg:text-base font-medium py-1 flex flex-wrap gap-2 gap-y-0">
+              <p class="text-sm lg:text-base text-zinc-800 dark:text-zinc-400 mb-1">
+                {work.contribution}
+              </p>
+              <ul class="text-xs lg:text-base flex flex-wrap gap-2 gap-y-.5">
                 {work.tech?.map((tech, i, arr) => (
-                  <li class="text-zinc-600 py-1">
+                  <li class="text-zinc-600 dark:text-zinc-400py-1">
                     {tech}
                     {i + 1 !== arr.length ? "," : ""}
                   </li>
@@ -114,6 +113,91 @@ const experiences = [
     }
   </div>
 </section>
+
+<style>
+  /* Color tokens (single source of truth) */
+  :root {
+    --timeline-color-zinc: #666666;
+    --timeline-color-black: #444;
+    --timeline-color-red: #ef4444;
+    --timeline-color-yellow: #f59e0b;
+    --timeline-color-green: #107d58;
+    --timeline-color-blue: #2563eb;
+
+    /* control the default border and date colors for the timeline */
+    --timeline-border-color: #444;
+    --timeline-date-color: #555;
+  }
+
+  /* Dark-mode overrides (html.dark or html[dark] will apply)
+     Using the attribute selector makes it easy to support custom theme names:
+       <html dark> or <html dark="slate"> or <html class="dark">
+  */
+  html.dark,
+  html[dark] {
+    --timeline-color-zinc: #9ca3af; /* lighter zinc in dark */
+    --timeline-color-black: #444; /* show as light in dark */
+    --timeline-color-red: #fca5a5;
+    --timeline-color-yellow: #fcd34d;
+    --timeline-color-green: #34d399;
+    --timeline-color-blue: #93c5fd;
+
+    /* dark-mode border + date defaults */
+    --timeline-border-color: rgba(233, 233, 233, 0.091);
+    --timeline-date-color: #e6e6e6;
+  }
+
+  /* small utility classes to map to the --timeline-color variable via tokens */
+  .timeline-zinc {
+    --timeline-color: var(--timeline-color-zinc);
+    --timeline-border-color: rgba(102, 102, 102, 0.12);
+    --timeline-date-color: var(--timeline-color-zinc);
+  }
+  .timeline-black {
+    --timeline-color: var(--timeline-color-black);
+    --timeline-border-color: #333;
+    --timeline-date-color: var(--timeline-color-black);
+  }
+  .timeline-red {
+    --timeline-color: var(--timeline-color-red);
+    --timeline-border-color: rgba(239, 68, 68, 0.12);
+    --timeline-date-color: var(--timeline-color-red);
+  }
+  .timeline-yellow {
+    --timeline-color: var(--timeline-color-yellow);
+    --timeline-border-color: rgba(245, 158, 11, 0.12);
+    --timeline-date-color: var(--timeline-color-yellow);
+  }
+  .timeline-green {
+    --timeline-color: var(--timeline-color-green);
+    --timeline-border-color: rgba(16, 125, 88, 0.12);
+    --timeline-date-color: var(--timeline-color-green);
+  }
+  .timeline-blue {
+    --timeline-color: var(--timeline-color-blue);
+    --timeline-border-color: rgba(37, 99, 235, 0.12);
+    --timeline-date-color: var(--timeline-color-blue);
+  }
+
+  /* default date color for timeline items */
+  .timeline-date {
+    color: var(--timeline-date-color);
+  }
+
+  /* gap utilities for the dashed timeline */
+  .timeline-gap-none {
+    --border-gap: 0px;
+  }
+  .timeline-gap-sm {
+    --border-gap: calc(var(--border-width) * 1);
+  }
+  .timeline-gap-md {
+    --border-gap: calc(var(--border-width) * 3);
+  }
+  .timeline-gap-lg {
+    --border-gap: calc(var(--border-width) * 6);
+  }
+</style>
 
 <style>
   @media screen and (min-width: 1024px) {
@@ -237,98 +321,13 @@ const experiences = [
       );
     }
 
-    .timeline-shell:hover::after {
-      opacity: 1;
+    /* .timeline-shell:hover::after {
+      opacity: 0.5;
       transform: translateY(0%);
-    }
+    } */
 
     .timeline-shell:hover .timeline-date {
       color: var(--timeline-color);
     }
-  }
-</style>
-
-<style>
-  /* Color tokens (single source of truth) */
-  :root {
-    --timeline-color-zinc: #666666;
-    --timeline-color-black: #444;
-    --timeline-color-red: #ef4444;
-    --timeline-color-yellow: #f59e0b;
-    --timeline-color-green: #107d58;
-    --timeline-color-blue: #2563eb;
-
-    /* control the default border and date colors for the timeline */
-    --timeline-border-color: #666;
-    --timeline-date-color: #444;
-  }
-
-  /* Dark-mode overrides (html.dark or html[dark] will apply)
-     Using the attribute selector makes it easy to support custom theme names:
-       <html dark> or <html dark="slate"> or <html class="dark">
-  */
-  html.dark,
-  html[dark] {
-    --timeline-color-zinc: #9ca3af; /* lighter zinc in dark */
-    --timeline-color-black: #444; /* show as light in dark */
-    --timeline-color-red: #fca5a5;
-    --timeline-color-yellow: #fcd34d;
-    --timeline-color-green: #34d399;
-    --timeline-color-blue: #93c5fd;
-
-    /* dark-mode border + date defaults */
-    --timeline-border-color: rgba(233, 233, 233, 0.091);
-    --timeline-date-color: #e6e6e6;
-  }
-
-  /* small utility classes to map to the --timeline-color variable via tokens */
-  .timeline-zinc {
-    --timeline-color: var(--timeline-color-zinc);
-    --timeline-border-color: rgba(102, 102, 102, 0.12);
-    --timeline-date-color: var(--timeline-color-zinc);
-  }
-  .timeline-black {
-    --timeline-color: var(--timeline-color-black);
-    --timeline-border-color: rgba(93, 93, 93, 0.16);
-    --timeline-date-color: var(--timeline-color-black);
-  }
-  .timeline-red {
-    --timeline-color: var(--timeline-color-red);
-    --timeline-border-color: rgba(239, 68, 68, 0.12);
-    --timeline-date-color: var(--timeline-color-red);
-  }
-  .timeline-yellow {
-    --timeline-color: var(--timeline-color-yellow);
-    --timeline-border-color: rgba(245, 158, 11, 0.12);
-    --timeline-date-color: var(--timeline-color-yellow);
-  }
-  .timeline-green {
-    --timeline-color: var(--timeline-color-green);
-    --timeline-border-color: rgba(16, 125, 88, 0.12);
-    --timeline-date-color: var(--timeline-color-green);
-  }
-  .timeline-blue {
-    --timeline-color: var(--timeline-color-blue);
-    --timeline-border-color: rgba(37, 99, 235, 0.12);
-    --timeline-date-color: var(--timeline-color-blue);
-  }
-
-  /* default date color for timeline items */
-  .timeline-date {
-    color: var(--timeline-date-color);
-  }
-
-  /* gap utilities for the dashed timeline */
-  .timeline-gap-none {
-    --border-gap: 0px;
-  }
-  .timeline-gap-sm {
-    --border-gap: calc(var(--border-width) * 1);
-  }
-  .timeline-gap-md {
-    --border-gap: calc(var(--border-width) * 3);
-  }
-  .timeline-gap-lg {
-    --border-gap: calc(var(--border-width) * 6);
   }
 </style>

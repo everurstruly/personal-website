@@ -1,7 +1,7 @@
 ---
 import { Github, Linkedin, Mail } from "lucide-astro";
-import { website, socialLinks } from "../seo";
-import { desktopNavMenuList } from "../index.astro";
+import { website, socialLinks } from "@pages/seo";
+import { desktopNavMenuList } from "@pages/index.astro";
 
 type Props = {
   class?: string;
@@ -30,20 +30,20 @@ const props = Astro.props;
 
     <div
       id="sidebar-bg-idle"
-      class="absolute inset-0 bg-amber-50 dark:bg-amber-100 z-50 pointer-events-auto"
+      class="absolute inset-0 bg-zinc-100 dark:bg-zinc-950 z-50 pointer-events-auto"
     >
     </div>
   </div>
 
   <div
-    class="text-zinc-900 flex flex-col h-full overflow-y-auto !bg-transparent"
+    class="text-zinc-900 dark:text-zinc-200 flex flex-col h-full overflow-y-auto !bg-transparent"
   >
-    <header class="pt-10 mastermind_jumpscare px-8 flex flex-col">
+    <header class="pt-10 px-8 flex flex-col">
       <h3 class="text-xl font-medium mb-0">Oghenetefa Okotete</h3>
-      <span class="text-sm flex items-center gap-x-1"> Software Engineer </span>
+      <span class="text-sm flex items-center gap-x-1">Software Engineer</span>
     </header>
 
-    <nav class="px-8 mt-auto flex flex-col gap-1 text-lg pt-20 pb-10">
+    <nav class="px-8 mt-auto flex flex-col gap-1 text-lg pt-20 pb-10 mb-8">
       {
         desktopNavMenuList.map((link) => (
           <a class="hover:underline p-1.5" href={link.href}>

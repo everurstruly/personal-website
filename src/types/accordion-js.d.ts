@@ -8,7 +8,7 @@ declare module "accordion-js" {
 
     openOnInit?: number[];
 
-    [key: string]: any;
+    [key: string]: unknown;
   }
 
   class Accordion {
