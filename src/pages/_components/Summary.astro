@@ -1,6 +1,11 @@
 ---
-import { ExternalLink, Github, Linkedin, Mail } from "lucide-astro";
-import { socialLinks, website } from "../seo";
+import {
+  ExternalLink,
+  Github,
+  Linkedin,
+  MessageCircleMore,
+} from "lucide-astro";
+import { socialLinks } from "../seo";
 ---
 
 <section id="summary" class="pt-14 pb-10">
@@ -17,9 +22,9 @@ import { socialLinks, website } from "../seo";
     <div class="flex gap-x-6 items-center min-[500px]:justify-center">
       {
         [
-          { Icon: Mail, href: `https://mailto:${website.email}` },
           { Icon: Github, href: socialLinks.github.href },
           { Icon: Linkedin, href: socialLinks.linkedin.href },
+          { Icon: MessageCircleMore, href: socialLinks.whatsapp.href },
         ].map((item) => {
           return (
             <a

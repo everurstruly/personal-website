@@ -1,5 +1,5 @@
 ---
-import { Github, Linkedin, Mail } from "lucide-astro";
+import { Linkedin, Mail, Github } from "lucide-astro";
 import { website, socialLinks } from "@pages/seo";
 import { desktopNavMenuList } from "@pages/index.astro";
 
@@ -56,22 +56,30 @@ const props = Astro.props;
     <footer class="pb-10 px-8 flex gap-4 text-sm reveal-opacity">
       <a
         class="px-1.5 py-3 hover:underline group"
-        href=`mailto:${website.email}`
+        href={`mailto:${website.email}`}
+        title="Email"
+        target="_blank"
+        rel="noopener noreferrer"
       >
         <Mail class="size-5 stroke-zinc-600 group-hover:stroke-blue-600" />
-      </a>
-
-      <a
-        class="px-1.5 py-3 hover:underline group"
-        href={socialLinks.github.href}
-      >
-        <Github class="size-5 stroke-zinc-600 group-hover:stroke-blue-600" />
       </a>
       <a
         class="px-1.5 py-3 hover:underline group"
         href={socialLinks.linkedin.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        title="LinkedIn"
       >
         <Linkedin class="size-5 stroke-zinc-600 group-hover:stroke-blue-600" />
+      </a>
+      <a
+        class="px-1.5 py-3 hover:underline group"
+        href={socialLinks.github.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        title="GitHub"
+      >
+        <Github class="size-5 stroke-zinc-600 group-hover:stroke-blue-600" />
       </a>
     </footer>
   </div>

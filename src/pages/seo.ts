@@ -17,6 +17,10 @@ export const socialLinks = {
     title: "linkedin",
     href: "https://linkedin.com/in/everurstruly",
   },
+  whatsapp: {
+    title: "whatsapp",
+    href: "https://wa.me/2349036227457",
+  },
 } as const;
 
 export type Metadata = {
