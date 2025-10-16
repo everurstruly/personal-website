@@ -54,7 +54,7 @@
   </button>
 
   <button
-    id="system-theme-button"
+    id="browser-theme-button"
     aria-label="System theme"
     class="theme-button group size-8 flex items-center justify-center rounded-full"
   >
@@ -78,96 +78,169 @@
 </div>
 
 <style>
-  html:not([data-theme="system"]):not(.dark) #light-theme-button svg,
-  html:not([data-theme="system"]).dark #dark-theme-button svg,
-  html[data-theme="system"] #system-theme-button svg {
+  html:not([data-theme-source="browser"]):not(.dark) #light-theme-button svg,
+  html:not([data-theme-source="browser"]).dark #dark-theme-button svg,
+  html[data-theme-source="browser"] #browser-theme-button svg {
     stroke: dodgerblue;
   }
-  :not(html[data-theme="system"]) && :not(html.dark) #light-theme-button svg,
-  html[data-theme="system"] #system-theme-button svg {
+  :not(html[data-theme-source="browser"])
+    &&
+    :not(html.dark)
+    #light-theme-button
+    svg,
+  html[data-theme-source="browser"] #browser-theme-button svg {
     stroke: dodgerblue;
+  }
+
+  .disable-transitions *,
+  .disable-transitions *::before,
+  .disable-transitions *::after {
+    transition: none !important;
   }
 </style>
 
 <script>
-  function preloadTheme() {
-    const userTheme = localStorage.theme;
+  const defaultTheme = "light";
+  const themeLocalStorageKey = "theme";
+  const themeTransitionClass = "disable-transitions";
+  const themeCoverageRootEl = document.documentElement;
+  const themeCoverageDataAttribute = "data-theme";
 
-    if (userTheme === "light" || userTheme === "dark") {
-      const isDark = userTheme === "dark";
-      toggleTheme({ isDark });
-    } else {
-      const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-      toggleTheme({ isDark });
-    }
+  function disableTransitionsTemporarily() {
+    themeCoverageRootEl.classList.add(themeTransitionClass);
+    // remove after next frame so transitions don't flash
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() =>
+        themeCoverageRootEl.classList.remove(themeTransitionClass)
+      );
+    });
   }
 
-  function toggleTheme({ isDark }: { isDark: boolean }) {
-    const css = document.createElement("style");
-    const html = document.getElementsByTagName("html")[0];
+  const applyTheme = {
+    dark: () => {
+      disableTransitionsTemporarily();
+      themeCoverageRootEl.classList.add("dark");
+      themeCoverageRootEl.setAttribute(themeCoverageDataAttribute, "dark");
+      localStorage.setItem(themeLocalStorageKey, "dark");
+    },
+    light: () => {
+      disableTransitionsTemporarily();
+      themeCoverageRootEl.classList.remove("dark");
+      themeCoverageRootEl.setAttribute(themeCoverageDataAttribute, "light");
+      localStorage.setItem(themeLocalStorageKey, "light");
+    },
+  };
 
-    css.appendChild(
-      document.createTextNode(
-        `* {
-             -webkit-transition: none !important;
-             -moz-transition: none !important;
-             -o-transition: none !important;
-             -ms-transition: none !important;
-             transition: none !important;
-          }
-        `
-      )
+  function loadTheme() {
+    type Theme = keyof typeof applyTheme;
+    const savedTheme = localStorage.getItem(themeLocalStorageKey);
+
+    if (savedTheme === "browser") {
+      themeCoverageRootEl.setAttribute(
+        themeCoverageDataAttribute + "-source",
+        "browser"
+      );
+
+      const theme = window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "dark"
+        : "light";
+
+      applyTheme[theme]();
+      return;
+    }
+
+    if (Object.keys(applyTheme).includes(savedTheme || "")) {
+      themeCoverageRootEl.setAttribute(
+        themeCoverageDataAttribute + "-source",
+        "user"
+      );
+
+      applyTheme[savedTheme as Theme]();
+      return;
+    }
+
+    themeCoverageRootEl.setAttribute(
+      themeCoverageDataAttribute + "-source",
+      "default"
     );
-
-    document.head.appendChild(css);
-
-    if (isDark) {
-      document.documentElement.classList.add("dark");
-      html.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-      html.classList.remove("dark");
-    }
-
-    window.getComputedStyle(css).opacity;
-    document.head.removeChild(css);
+    applyTheme[defaultTheme]();
   }
 
-  const html = document.getElementsByTagName("html")[0];
+  let switchesActivated = false;
+  const activateSwitches = () => {
+    if (switchesActivated) return;
+    switchesActivated = true;
 
-  const lightThemeButton = document.getElementById("light-theme-button");
-  lightThemeButton?.addEventListener("click", () => {
-    html.setAttribute("data-theme", "light");
-    localStorage.setItem("theme", "light");
-    toggleTheme({ isDark: false });
-  });
-
-  const darkThemeButton = document.getElementById("dark-theme-button");
-  darkThemeButton?.addEventListener("click", () => {
-    html.setAttribute("data-theme", "dark");
-    localStorage.setItem("theme", "dark");
-    toggleTheme({ isDark: true });
-  });
-
-  const systemThemeButton = document.getElementById("system-theme-button");
-  systemThemeButton?.addEventListener("click", () => {
-    html.setAttribute("data-theme", "system");
-    localStorage.setItem("theme", "system");
-    const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    toggleTheme({ isDark });
-  });
-
-  window
-    .matchMedia("(prefers-color-scheme: dark)")
-    .addEventListener("change", (event) => {
-      if (localStorage.theme === "system" || !localStorage.theme) {
-        const isDark = event.matches;
-        toggleTheme({ isDark });
-        html.setAttribute("data-theme", "system");
-      }
+    const lightThemeButton = document.getElementById("light-theme-button");
+    lightThemeButton?.addEventListener("click", () => {
+      applyTheme.light();
+      themeCoverageRootEl.setAttribute(
+        themeCoverageDataAttribute + "-source",
+        "user"
+      );
     });
 
+    const darkThemeButton = document.getElementById("dark-theme-button");
+    darkThemeButton?.addEventListener("click", () => {
+      applyTheme.dark();
+      themeCoverageRootEl.setAttribute(
+        themeCoverageDataAttribute + "-source",
+        "user"
+      );
+    });
+
+    const browserThemeButton = document.getElementById("browser-theme-button");
+    browserThemeButton?.addEventListener("click", () => {
+      themeCoverageRootEl.setAttribute(
+        themeCoverageDataAttribute + "-source",
+        "browser"
+      );
+      const theme = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      if (theme) {
+        applyTheme.dark();
+      } else {
+        applyTheme.light();
+      }
+    });
+  };
+
+  // Listen for OS/browser color-scheme changes. Only react when the user
+  // hasn't set an explicit theme (saved value is missing or 'browser').
+  const prefersDark = window.matchMedia
+    ? window.matchMedia("(prefers-color-scheme: dark)")
+    : null;
+  /** @type {number} */
+  let mqTimer = 0;
+  function onPrefersDarkChange() {
+    try {
+      const saved = localStorage.getItem(themeLocalStorageKey);
+      if (saved && saved !== "browser") return; // user explicitly chose light/dark
+    } catch (e) {
+      // ignore storage errors and proceed
+    }
+
+    clearTimeout(mqTimer);
+    mqTimer = window.setTimeout(() => {
+      // Re-apply theme resolution based on the new system preference
+      loadTheme();
+    }, 60);
+  }
+
+  if (prefersDark) {
+    if (typeof prefersDark.addEventListener === "function") {
+      prefersDark.addEventListener("change", onPrefersDarkChange);
+    } else if (typeof prefersDark.addListener === "function") {
+      prefersDark.addListener(onPrefersDarkChange);
+    }
+  }
+
   document.addEventListener("DOMContentLoaded", () => {
-    preloadTheme();
+    loadTheme();
+    activateSwitches();
+  });
+
+  document.addEventListener("astro:after-swap", () => {
+    loadTheme();
+    activateSwitches();
   });
 </script>
