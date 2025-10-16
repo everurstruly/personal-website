@@ -83,14 +83,6 @@
   html[data-theme-source="browser"] #browser-theme-button svg {
     stroke: dodgerblue;
   }
-  :not(html[data-theme-source="browser"])
-    &&
-    :not(html.dark)
-    #light-theme-button
-    svg,
-  html[data-theme-source="browser"] #browser-theme-button svg {
-    stroke: dodgerblue;
-  }
 
   .disable-transitions *,
   .disable-transitions *::before,
@@ -101,10 +93,10 @@
 
 <script>
   const defaultTheme = "light";
-  const themeLocalStorageKey = "theme";
   const themeTransitionClass = "disable-transitions";
   const themeCoverageRootEl = document.documentElement;
   const themeCoverageDataAttribute = "data-theme";
+  const themeSourceDataAttribute = "data-theme-source";
 
   function disableTransitionsTemporarily() {
     themeCoverageRootEl.classList.add(themeTransitionClass);
@@ -116,54 +108,48 @@
     });
   }
 
+  const registerThemeSource = (source: "user" | "browser") => {
+    themeCoverageRootEl.setAttribute(themeSourceDataAttribute, source);
+    localStorage.setItem(themeSourceDataAttribute, source);
+  };
+
   const applyTheme = {
     dark: () => {
       disableTransitionsTemporarily();
       themeCoverageRootEl.classList.add("dark");
       themeCoverageRootEl.setAttribute(themeCoverageDataAttribute, "dark");
-      localStorage.setItem(themeLocalStorageKey, "dark");
+      localStorage.setItem(themeCoverageDataAttribute, "dark");
     },
     light: () => {
       disableTransitionsTemporarily();
       themeCoverageRootEl.classList.remove("dark");
       themeCoverageRootEl.setAttribute(themeCoverageDataAttribute, "light");
-      localStorage.setItem(themeLocalStorageKey, "light");
+      localStorage.setItem(themeCoverageDataAttribute, "light");
     },
   };
 
+  type Theme = keyof typeof applyTheme;
+
   function loadTheme() {
-    type Theme = keyof typeof applyTheme;
-    const savedTheme = localStorage.getItem(themeLocalStorageKey);
+    const savedTheme = localStorage.getItem(themeCoverageDataAttribute);
+    const savedThemeSource = localStorage.getItem(themeSourceDataAttribute);
 
-    if (savedTheme === "browser") {
-      themeCoverageRootEl.setAttribute(
-        themeCoverageDataAttribute + "-source",
-        "browser"
-      );
-
+    if (savedThemeSource === "browser") {
       const theme = window.matchMedia("(prefers-color-scheme: dark)").matches
         ? "dark"
         : "light";
 
+      registerThemeSource("browser");
       applyTheme[theme]();
       return;
     }
 
+    registerThemeSource("user");
     if (Object.keys(applyTheme).includes(savedTheme || "")) {
-      themeCoverageRootEl.setAttribute(
-        themeCoverageDataAttribute + "-source",
-        "user"
-      );
-
       applyTheme[savedTheme as Theme]();
-      return;
+    } else {
+      applyTheme[defaultTheme]();
     }
-
-    themeCoverageRootEl.setAttribute(
-      themeCoverageDataAttribute + "-source",
-      "default"
-    );
-    applyTheme[defaultTheme]();
   }
 
   let switchesActivated = false;
@@ -173,28 +159,19 @@
 
     const lightThemeButton = document.getElementById("light-theme-button");
     lightThemeButton?.addEventListener("click", () => {
+      registerThemeSource("user");
       applyTheme.light();
-      themeCoverageRootEl.setAttribute(
-        themeCoverageDataAttribute + "-source",
-        "user"
-      );
     });
 
     const darkThemeButton = document.getElementById("dark-theme-button");
     darkThemeButton?.addEventListener("click", () => {
+      registerThemeSource("user");
       applyTheme.dark();
-      themeCoverageRootEl.setAttribute(
-        themeCoverageDataAttribute + "-source",
-        "user"
-      );
     });
 
     const browserThemeButton = document.getElementById("browser-theme-button");
     browserThemeButton?.addEventListener("click", () => {
-      themeCoverageRootEl.setAttribute(
-        themeCoverageDataAttribute + "-source",
-        "browser"
-      );
+      registerThemeSource("browser");
       const theme = window.matchMedia("(prefers-color-scheme: dark)").matches;
       if (theme) {
         applyTheme.dark();
@@ -203,36 +180,6 @@
       }
     });
   };
-
-  // Listen for OS/browser color-scheme changes. Only react when the user
-  // hasn't set an explicit theme (saved value is missing or 'browser').
-  const prefersDark = window.matchMedia
-    ? window.matchMedia("(prefers-color-scheme: dark)")
-    : null;
-  /** @type {number} */
-  let mqTimer = 0;
-  function onPrefersDarkChange() {
-    try {
-      const saved = localStorage.getItem(themeLocalStorageKey);
-      if (saved && saved !== "browser") return; // user explicitly chose light/dark
-    } catch (e) {
-      // ignore storage errors and proceed
-    }
-
-    clearTimeout(mqTimer);
-    mqTimer = window.setTimeout(() => {
-      // Re-apply theme resolution based on the new system preference
-      loadTheme();
-    }, 60);
-  }
-
-  if (prefersDark) {
-    if (typeof prefersDark.addEventListener === "function") {
-      prefersDark.addEventListener("change", onPrefersDarkChange);
-    } else if (typeof prefersDark.addListener === "function") {
-      prefersDark.addListener(onPrefersDarkChange);
-    }
-  }
 
   document.addEventListener("DOMContentLoaded", () => {
     loadTheme();
