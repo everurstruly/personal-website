@@ -1,13 +1,12 @@
 ---
-import { Button } from "@lib/components/ui/button";
 import { ExternalLink, Github, Linkedin, Mail } from "lucide-astro";
 import { socialLinks, website } from "../seo";
 ---
 
 <section id="summary" class="pt-14 pb-10">
-  <div class="max-w-fit sm:max-w-none sm:mx-auto">
+  <div class="max-w-fit min-[500px]:max-w-none min-[500px]:mx-auto">
     <p
-      class="w-full max-w-[46ch] lg:mx-auto text-lg sm:text-xl sm:text-center lg:text-2xl mb-4 !leading-[1.54]"
+      class="w-full max-w-[46ch] lg:mx-auto text-lg min-[500px]:text-xl min-[500px]:text-center lg:text-2xl mb-4 !leading-[1.54]"
     >
       Hii! I'm <span class="">Tefa</span>, a passionate Front-end developer with
       3+ years of experience building full-stack web applications across modern
@@ -15,7 +14,7 @@ import { socialLinks, website } from "../seo";
       user-focused products.
     </p>
 
-    <div class="flex gap-x-6 items-center sm:justify-center">
+    <div class="flex gap-x-6 items-center min-[500px]:justify-center">
       {
         [
           { Icon: Mail, href: `https://mailto:${website.email}` },
