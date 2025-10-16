@@ -1,8 +1,14 @@
 ---
-import { ExternalLink } from "lucide-astro";
+import {
+  ExternalLink,
+  BriefcaseBusiness,
+  Building2,
+  Frame,
+} from "lucide-astro";
 
 const experiences = [
   {
+    icon: Building2,
     date: ["Feb 2025", "Till Date"],
     role: "Full Stack Developer",
     business: "X3Lab",
@@ -12,6 +18,7 @@ const experiences = [
     tech: ["React.js", "Node.js", "Tailwind CSS", "Nest.js", "Git"],
   },
   {
+    icon: Frame,
     date: ["Nov 2021", "Nov 2022"],
     role: "Front End Developer",
     business: "Studio Doresh",
@@ -21,6 +28,7 @@ const experiences = [
     tech: ["Mobile First CSS", "DOM Javascript", "Bootstrap", "Figma", "Git"],
   },
   {
+    icon: BriefcaseBusiness,
     date: ["2022", "Till Date"],
     role: "Web Developer",
     business: "Freelance",
@@ -80,24 +88,33 @@ const experiences = [
           </svg> */}
 
           <div class="lg:flex items-start">
-            <div class="shrink-0 lg:w-[var(--timeline-col-width)] lg:pe-16 lg:text-start">
-              <span class="lg:mt-4 text-xs lg:text-sm font-mono mb-6 capitalize lg:text-nowrap timeline-date text-amber-100">
+            <div class="hidden lg:flex shrink-0 lg:w-[var(--timeline-col-width)] lg:pe-[var(--timeline-col-padding-end)] lg:text-end lg:justify-end lg:mt-3">
+              <span class="timeline-date">
                 {work.date?.[0]} — {work.date?.[1]}
               </span>
             </div>
 
-            <div class="lg:ps-14 lg:mt-2">
-              <header class="mb-2">
+            <div class="bg-background size-10 border shrink-0 mb-2 lg:mb-0 lg:-ms-5 lg:mt-0 grid place-content-center lg:z-20 lg:relative">
+              <work.icon className="size-4 stroke-zinc-600" />
+            </div>
+
+            <div class="lg:ps-14 lg:mt-3">
+              <header class="mb-4 flex flex-col">
+                <h5 class="text-base text-zinc-400 dark:text-default-100">
+                  {work.business}
+                </h5>
                 <h4 class="text-base sm:text-lg lg:text-xl">
-                  <span class="font-semibold">{work.role}</span> at{" "}
-                  <a href="#" class="text-zinc-950 dark:text-amber-200">
-                    {work.business}
-                  </a>
+                  <span class="font-semibold">{work.role}</span>
                 </h4>
+                <p class="lg:hidden leading-none timeline-date mt-1.5">
+                  {work.date?.[0]} — {work.date?.[1]}
+                </p>
               </header>
-              <p class="text-sm lg:text-base text-zinc-800 dark:text-zinc-400 mb-1">
+
+              <p class="text-sm lg:text-base text-zinc-800 dark:text-zinc-400 mb-2">
                 {work.contribution}
               </p>
+
               <ul class="text-xs lg:text-base flex flex-wrap gap-2 gap-y-.5">
                 {work.tech?.map((tech, i, arr) => (
                   <li class="text-zinc-600 dark:text-zinc-400py-1">
@@ -126,7 +143,7 @@ const experiences = [
 
     /* control the default border and date colors for the timeline */
     --timeline-border-color: #444;
-    --timeline-date-color: #555;
+    --timeline-date-color: #eee;
   }
 
   /* Dark-mode overrides (html.dark or html[dark] will apply)
@@ -182,6 +199,7 @@ const experiences = [
   /* default date color for timeline items */
   .timeline-date {
     color: var(--timeline-date-color);
+    @apply capitalize leading-none lg:text-nowrap lg:text-sm;
   }
 
   /* gap utilities for the dashed timeline */
@@ -204,7 +222,8 @@ const experiences = [
     .timeline-shell {
       --border-width: 1px; /* thickness of the dashed line */
       --border-height: 1px; /* thickness of the dashed line */
-      --timeline-col-width: 15rem; /* matches Tailwind lg:w-52 (13rem / 208px) */
+      --timeline-col-padding-end: 5rem;
+      --timeline-col-width: calc(10rem + var(--timeline-col-padding-end));
       --transition-duration: 700ms;
       --border-gap: calc(
         var(--border-width) * 4
