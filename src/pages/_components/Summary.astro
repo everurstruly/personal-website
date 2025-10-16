@@ -51,12 +51,17 @@ import { socialLinks, website } from "../seo";
 
 <style>
   /* make anchor scrolling land below mobile topbars: 4rem on small screens, keep desktop spacing at lg */
+  #about-my-socials {
+    scroll-margin-top: 5rem;
+  }
+
   #summary {
     scroll-margin-top: 20rem;
   }
 
   @media screen and (min-width: 1024px) {
     /* desktop: respect original padding (pt-14 = 3.5rem) */
+    #about-my-socials,
     #summary {
       /* revert to the default behaviour on desktop so we don't hardcode a size */
       scroll-margin-top: revert;
