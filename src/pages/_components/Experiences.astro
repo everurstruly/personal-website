@@ -56,7 +56,7 @@ const experiences = [
       target="_blank"
       rel="noopener noreferrer"
     >
-      {`Download Full Version Resume {Soon}`}
+      {`Download Resume (CV)`}
       <ExternalLink class="size-4 stroke-current" />
     </a>
   </header>
@@ -74,24 +74,24 @@ const experiences = [
               </span>
             </div>
 
-            <div class="bg-background lg:-ms-4 size-8 lg:size-10__ border shrink-0 mb-4 lg:mb-0 lg:mt-0 grid place-content-center lg:z-20 lg:relative border-zinc-400/60 dark:border-zinc-600">
-              <work.icon className="size-4 stroke-zinc-400 dark:stroke-zinc-600" />
+            <div class="bg-background lg:-ms-4 size-8 lg:size-10__ border shrink-0 mb-4 lg:mb-0 lg:mt-0 grid place-content-center lg:z-20 lg:relative border-foreground ">
+              <work.icon className="size-4" />
             </div>
 
             <div class="lg:ps-20">
               <header class="mb-4 flex flex-col">
-                <h5 class="text-base text-zinc-600 dark:text-default-100">
+                <h5 class="text-base font-medium leading-none">
                   {work.business}
                 </h5>
                 <h4 class="text-base font-semibold sm:text-lg lg:text-xl">
                   {work.role}
                 </h4>
-                <p class="lg:hidden timeline-date text-xs">
+                <p class="lg:hidden timeline-date font-medium mt-1 text-xs">
                   {work.date?.[0]} — {work.date?.[1]}
                 </p>
               </header>
 
-              <p class="text-sm lg:text-base text-zinc-800 dark:text-zinc-400">
+              <p class="text-sm lg:text-base text-zinc-900 dark:text-zinc-400">
                 {work.contribution}{" "}
                 <span class="font-semibold">Technologies used:</span>{" "}
                 {work.tech.join(", ")}
@@ -108,7 +108,7 @@ const experiences = [
   /* Color tokens (single source of truth) */
   :root {
     --timeline-color-zinc: #666666;
-    --timeline-color-black: #444;
+    --timeline-color-black: #222;
     --timeline-color-red: #ef4444;
     --timeline-color-yellow: #f59e0b;
     --timeline-color-green: #107d58;
@@ -116,7 +116,7 @@ const experiences = [
 
     /* control the default border and date colors for the timeline */
     --timeline-border-color: #444;
-    --timeline-date-color: #eee;
+    --timeline-date-color: var(--foreground-muted, #333);
   }
 
   /* Dark-mode overrides (html.dark or html[dark] will apply)
@@ -126,7 +126,7 @@ const experiences = [
   html.dark,
   html[dark] {
     --timeline-color-zinc: #9ca3af; /* lighter zinc in dark */
-    --timeline-color-black: #444; /* show as light in dark */
+    --timeline-color-black: #ddd; /* show as light in dark */
     --timeline-color-red: #fca5a5;
     --timeline-color-yellow: #fcd34d;
     --timeline-color-green: #34d399;
@@ -134,7 +134,7 @@ const experiences = [
 
     /* dark-mode border + date defaults */
     --timeline-border-color: rgba(233, 233, 233, 0.091);
-    --timeline-date-color: #ddd;
+    --timeline-date-color: var(--foreground-muted, #666);
   }
 
   /* small utility classes to map to the --timeline-color variable via tokens */
@@ -172,7 +172,7 @@ const experiences = [
   /* default date color for timeline items */
   .timeline-date {
     color: var(--timeline-date-color);
-    @apply capitalize text-xs font-mono leading-relaxed lg:text-nowrap;
+    @apply capitalize text-xs leading-relaxed lg:text-nowrap;
   }
 
   /* gap utilities for the dashed timeline */
