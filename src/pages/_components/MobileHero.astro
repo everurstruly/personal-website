@@ -4,41 +4,39 @@ import MainContainer from "./MainContainer.astro";
 
 <section class="pt-16 lg:hidden">
   <MainContainer>
-    <div class="max-w-md sm:max-w-md mx-auto">
-      <p class="text-xs text-zinc-600 font-mono uppercase mb-1.5">
+    <div class="max-w-fit mx-auto flex flex-col">
+      <p class="w-fit ps-1 text-xs text-zinc-600 font-mono uppercase mb-1.5">
         Software Engineer
       </p>
-      <h1
-        class="relative z-10 flex flex-col gap-y-1 w-full uppercase text-4xl leading-none min-[340px]:text-5xl sm:text-6xl"
+      <h1 class="uppercase text-4xl font-semibold">Oghenetefa Okotete</h1>
+
+      <div
+        class="order-first p-1 rounded-xl h-12 w-[13ch] mb-3 min-[480px]:order-last min-[480px]:w-full min-[480px]:h-20 min-[480px]:mt-1 overflow-hidden"
       >
-        <span class="self-start">Oghenetefa</span>
-        <span class="self-end ps-4 sm:self-start sm:ps-0">Okotete</span>
-      </h1>
-    </div>
+        <div
+          id="headshot-wrap"
+          class="size-full overflow-hidden rounded-xl relative"
+        >
+          <img
+            id="expectedHeadshot"
+            src="/me/headshot-youth.jpg"
+            alt="$whoami"
+            width="50"
+            height="50"
+            class="size-full object-cover block object-center"
+          />
 
-    <!-- stacked images: ghost on top, expected underneath -->
-    <div
-      id="headshot-wrap"
-      class="w-full max-w-80 h-[400px] mx-auto -mt-6__ mt-4 translate-x-2 sm:translate-x-0 relative overflow-hidden"
-    >
-      <img
-        id="expectedHeadshot"
-        src="/me/headshot-youth.jpg"
-        alt="$whoami"
-        width="300"
-        height="500"
-        class="w-full h-full object-cover block object-center"
-      />
-
-      <img
-        id="ghostHeadshot"
-        src="/me/headshot-rebel.jpg"
-        alt="ghost"
-        width="300"
-        height="500"
-        class="w-full h-full object-cover absolute inset-0"
-        style="opacity:1; transition: opacity 600ms ease-in-out;"
-      />
+          <img
+            id="ghostHeadshot"
+            src="/me/headshot-rebel.jpg"
+            alt="ghost"
+            width="50"
+            height="50"
+            class="size-full object-cover absolute inset-0"
+            style="opacity:1; transition: opacity 600ms ease-in-out;"
+          />
+        </div>
+      </div>
     </div>
   </MainContainer>
 </section>

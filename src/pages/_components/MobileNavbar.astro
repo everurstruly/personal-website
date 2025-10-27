@@ -3,7 +3,9 @@ import { navMenuList } from "@pages/index.astro";
 import MainContainer from "./MainContainer.astro";
 ---
 
-<nav class="lg:hidden w-full sticky top-0 bg-blue-600 text-zinc-100 h-12 z-50">
+<nav
+  class="lg:hidden w-full sticky top-0 bg-white/90 dark:bg-background/80 dark:text-zinc-100 backdrop-blur-sm h-14 z-50"
+>
   <MainContainer class="h-full">
     <div
       class="flex items-center justify-end gap-x-3 min-[340px]:gap-x-4 h-full"
@@ -14,14 +16,14 @@ import MainContainer from "./MainContainer.astro";
             <>
               <a
                 href={item.href}
-                class="h-full inline-flex items-center gap-x-1 px-0.5 min-[340px]:px-0"
+                class="inline-flex items-center gap-x-1 px-0.5 min-[340px]:px-0"
               >
-                <span class="text-xs min-[340px]:text-sm font-medium font-mono">
+                <span class="text-xs min-[340px]:text-sm font-medium">
                   {item.title}
                 </span>
               </a>
               {index < arr.length - 1 && (
-                <span class="text-xs font-sans italic">//</span>
+                <span class="text-xs font-sans">||</span>
               )}
             </>
           );
