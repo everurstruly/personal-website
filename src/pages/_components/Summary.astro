@@ -11,7 +11,7 @@ import { socialLinks } from "../seo";
 <section id="summary" class="pt-14 pb-10">
   <div class="max-w-fit min-[500px]:max-w-none min-[500px]:mx-auto">
     <p
-      class="w-full max-w-[46ch] lg:mx-auto text-lg min-[500px]:text-xl min-[500px]:text-center lg:text-2xl mb-4 !leading-[1.54]"
+      class="w-full max-w-[46ch] min-[500px]:mx-auto text-lg sm:!leading-[1.54] min-[500px]:text-xl min-[500px]:text-center lg:text-2xl mb-5"
     >
       Hii! I'm <span class="">Tefa</span>, a passionate Front-end developer with
       3+ years of experience building full-stack web applications across modern
@@ -28,13 +28,13 @@ import { socialLinks } from "../seo";
         ].map((item) => {
           return (
             <a
-              class="size-10 rounded-full border border-zinc-200 dark:border-zinc-800 grid place-content-center text-xs hover:border-zinc-700 dark:hover:border-zinc-100 transition-colors"
+              class="size-10 rounded-full border grid place-content-center text-xs hover:border-zinc-700 dark:hover:border-zinc-400 transition-colors"
               href={item.href}
               target="_blank"
               rel="noopener noreferrer"
               title={item.href.replace("https://", "").split(".")[0]}
             >
-              <item.Icon class="size-5 stroke-zinc-700 dark:stroke-zinc-100" />
+              <item.Icon class="size-5 stroke-zinc-700 dark:stroke-zinc-400" />
             </a>
           );
         })
