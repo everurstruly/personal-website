@@ -3,41 +3,41 @@ import { ExternalLink } from "lucide-astro";
 
 const highlights = [
   {
+    cover: "/highlights/project-cinema.jpg",
+    id: "editor",
+    date: "2025",
+    title: "Design System Theme Builder",
+    description:
+      "A visual theme editor for customizing and previewing themes for a very popular UI component library.",
+    tech: ["Material Design", "MUI", "React", "TypeScript"],
+    tags: ["Front End", "UI/UX", "Open Source", "Tooling"],
+    demoUrl: "https://mui-theme-editor.netlify.app/",
+    detailsUrl: "https://github.com/everurstruly/mui-theme-editor",
+  },
+  {
     cover: "/highlights/project-champions.png",
     id: "tournament",
-    date: "2025",
-    title: "Tournament Administration & Management Software",
+    date: "2026",
+    title: "Sports Admin & Engagement Platform",
     description:
-      "App suite for tournament scheduling, communication, and mobilization.",
+      "A mobile accessible tournaments management and engagement for organizers, participants, and spectators.",
     tech: ["PWA", "React.js", "Nest.js", "Next.js", "TailwindCSS"],
-    tags: ["Full Stack"],
+    tags: ["Full Stack", "Open Source", "PWA"],
     demoUrl: "https://renna.netlify.app",
     detailsUrl: "https://github.com/everurstruly/tournament-management-system",
   },
   {
     cover: "/highlights/project-camera.jpg",
     id: "travel",
-    date: "2025",
+    date: "2026",
     title: "Travel Experience Booking Platform",
     description:
       "An online marketplace for booking curated tours and activities worldwide, for relaxation and adventure.",
-    tech: ["Next.js", "Nest.js", "ShadcnUI", "PostgreSQL"],
+    tech: ["Next.js", "Nest.js", "MUI", "PostgreSQL"],
     tags: ["Full Stack"],
     // demoUrl: "https://github.com/everurstruly",
     detailsUrl:
       "https://github.com/everurstruly/travel-experiences-marketplace",
-  },
-  {
-    cover: "/highlights/project-wallet.png",
-    id: "fintech",
-    date: "2024",
-    title: "Offramping Fintech Platform",
-    description:
-      "A fintech platform enabling converting digital assets to fiat currency.",
-    tech: ["Next.js", "API Development", "PWA", "BaaS"],
-    tags: ["Full Stack"],
-    demoUrl: "https://rmlpay.vercel.app",
-    detailsUrl: "https://github.com/everurstruly",
   },
   {
     cover: "/highlights/project-game-controller.jpg",
@@ -49,7 +49,8 @@ const highlights = [
     tech: ["Javascript", "DOM Manipulation", "Responsive CSS", "HTML5"],
     tags: ["Front End"],
     demoUrl: "https://everurstruly.github.io/The-New-York-Times-Wordle-Clone/",
-    detailsUrl: "github.com/everurstruly/The-New-York-Times-Wordle-Clone",
+    detailsUrl:
+      "https://github.com/everurstruly/The-New-York-Times-Wordle-Clone",
   },
   // {
   //   id: "static",
@@ -64,7 +65,7 @@ const highlights = [
   // },
 ];
 
-const tints = ["red", "green", "yellow", "blue"];
+const tints = ["blue", "green", "red", "yellow", "beige"];
 ---
 
 <section id="highlights" class="py-20">
@@ -93,7 +94,7 @@ const tints = ["red", "green", "yellow", "blue"];
       highlights.map((project, idx) => {
         return (
           <article class="w-full lg:w-1/3 grow">
-            <div class="h-80 w-full overflow-hidden">
+            <div class="h-64 w-full overflow-hidden">
               <div class="tinted-image size-full bg-zinc-100">
                 <img
                   src={
@@ -121,7 +122,7 @@ const tints = ["red", "green", "yellow", "blue"];
                 <span class="text-sm">{project.date}</span>
               </div>
 
-              <p class="text-sm sm:text-base text-zinc-600 dark:text-zinc-400">
+              <p class="text-sm sm:text-base text-zinc-900 dark:text-zinc-400">
                 {project.description} <span class="font-semibold">Build:</span>{" "}
                 {project.tech.map((tag, index, arr) => {
                   const prefix = index === 0 ? "" : ", ";
