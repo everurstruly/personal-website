@@ -1,12 +1,17 @@
 ---
-import {
-  ExternalLink,
-  BriefcaseBusiness,
-  Building2,
-  Frame,
-} from "lucide-astro";
+import { ExternalLink, BriefcaseBusiness, Building2, Frame } from "lucide-astro";
 
 const experiences = [
+  {
+    icon: BriefcaseBusiness,
+    date: ["2022", "Till Date"],
+    role: "Web Developer",
+    business: "Freelance",
+    contribution:
+      "Worked across various domains including SaaS, Gamification, Fintech, Browser Automation, Custom Management and Editorial CMS. Building full-stack web applications with heavy focus on user experience and client expectations through effective planning and resourceful solutions.",
+    attachments: [{ label: "Screenshot", url: "" }],
+    tech: ["Typescript", "Next.js", "Nest.js", "Tailwind CSS", "Git"],
+  },
   {
     icon: Building2,
     date: ["Feb 2025", "Till Date"],
@@ -27,16 +32,6 @@ const experiences = [
     attachments: [{ label: "Screenshot", url: "" }],
     tech: ["Mobile First CSS", "DOM Javascript", "Bootstrap", "Figma", "Git"],
   },
-  {
-    icon: BriefcaseBusiness,
-    date: ["2022", "Till Date"],
-    role: "Web Developer",
-    business: "Freelance",
-    contribution:
-      "Worked across various domains including SaaS, gamification, fintech, e-commerce, headless CMS, and BaaS to build full-stack web applications with strong focus on user experience, solving both personal and client challenges through effective, scalable solutions.",
-    attachments: [{ label: "Screenshot", url: "" }],
-    tech: ["Typescript", "Next.js", "Nest.js", "Tailwind CSS", "Git"],
-  },
 ];
 ---
 
@@ -44,9 +39,7 @@ const experiences = [
   <header
     class="mb-8 lg:mb-14 flex flex-wrap gap-y-2 items-center gap-x-4 justify-between"
   >
-    <h2
-      class="text-4xl font-semibold uppercase text-zinc-800 dark:text-zinc-100"
-    >
+    <h2 class="text-4xl font-semibold uppercase text-zinc-800 dark:text-zinc-100">
       Work Experiences
     </h2>
 
@@ -80,9 +73,7 @@ const experiences = [
 
             <div class="lg:ps-20">
               <header class="mb-4 flex flex-col">
-                <h5 class="text-base font-medium leading-none">
-                  {work.business}
-                </h5>
+                <h5 class="text-base font-medium leading-none">{work.business}</h5>
                 <h4 class="text-base font-semibold sm:text-lg lg:text-xl">
                   {work.role}
                 </h4>
@@ -228,14 +219,12 @@ const experiences = [
       -webkit-mask: repeating-linear-gradient(
         to bottom,
         #000 0 var(--border-width),
-        transparent var(--border-width)
-          calc(var(--border-width) + var(--border-gap))
+        transparent var(--border-width) calc(var(--border-width) + var(--border-gap))
       );
       mask: repeating-linear-gradient(
         to bottom,
         #000 0 var(--border-width),
-        transparent var(--border-width)
-          calc(var(--border-width) + var(--border-gap))
+        transparent var(--border-width) calc(var(--border-width) + var(--border-gap))
       );
 
       /* subtle transition for hover/show/hide */
@@ -259,14 +248,12 @@ const experiences = [
       -webkit-mask: repeating-linear-gradient(
         to bottom,
         #000 0 var(--border-width),
-        transparent var(--border-width)
-          calc(var(--border-width) + var(--border-gap))
+        transparent var(--border-width) calc(var(--border-width) + var(--border-gap))
       );
       mask: repeating-linear-gradient(
         to bottom,
         #000 0 var(--border-width),
-        transparent var(--border-width)
-          calc(var(--border-width) + var(--border-gap))
+        transparent var(--border-width) calc(var(--border-width) + var(--border-gap))
       );
       transform-origin: top center;
       transition:

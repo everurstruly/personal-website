@@ -4,12 +4,12 @@ import { ExternalLink } from "lucide-astro";
 const highlights = [
   {
     cover: "/highlights/project-cinema.jpg",
-    id: "editor",
+    id: "theme-editor",
     date: "2025",
     title: "Theme Design Tool",
     description:
-      "A visual theme editor for generating and customizing themes for a very popular UI component library (MUI).",
-    tech: ["Material Design", "MUI", "React", "TypeScript"],
+      "A theme and design-system editor for Googles UI Component Library (MUI).",
+    tech: ["Material Design", "MUI", "React", "TypeScript", "Vite"],
     tags: ["Front End", "UI/UX", "Open Source", "Tooling"],
     demoUrl: "https://mui-theme-builder.netlify.app/editor",
     detailsUrl: "https://github.com/everurstruly/mui-theme-builder",
@@ -18,30 +18,29 @@ const highlights = [
     cover: "/highlights/project-champions.png",
     id: "tournament",
     date: "2026",
-    title: "Sports Admin & Engagement Platform",
+    title: "Sports Management & Discovery Platform",
     description:
-      "A mobile accessible tournaments management and engagement for organizers, participants, and spectators.",
-    tech: ["PWA", "React.js", "Nest.js", "Next.js", "TailwindCSS"],
-    tags: ["Full Stack", "Open Source", "PWA"],
-    demoUrl: "https://renna.netlify.app",
-    detailsUrl: "https://github.com/everurstruly/tournament-management-system",
+      "A mobile-first tournaments management and discovery for organizers, participants, and spectators.",
+    tech: ["React.js", "Nest.js", "Next.js", "TailwindCSS", "Vite"],
+    tags: ["Full Stack", "Mobile", "PWA"],
+    demoUrl: "https://monkeypost.netlify.app",
+    // detailsUrl: "https://github.com/everurstruly/tournament-management-system",
   },
   {
     cover: "/highlights/project-camera.jpg",
-    id: "travel",
+    id: "cleanup-extension",
     date: "2026",
-    title: "Travel Experience Booking Platform",
+    title: "AI Conversation Management Tool",
     description:
-      "An online marketplace for booking curated tours and activities worldwide, for relaxation and adventure.",
-    tech: ["Next.js", "Nest.js", "MUI", "PostgreSQL"],
-    tags: ["Full Stack"],
-    // demoUrl: "https://github.com/everurstruly",
-    detailsUrl:
-      "https://github.com/everurstruly/travel-experiences-marketplace",
+      "Easily cleanup, transfer and remix conversations across all ai-chat platforms with no login required.",
+    tech: ["Next.js", "Tailwind", "Google AI Studio", "MUI"],
+    tags: ["Frontend", "AI", "Automation"],
+    // demoUrl: "https://chrome.google.com/webstore/detail/ai-chat-clarity/ljhfjhgbfbdjhnjfbhgbgkccfddoih?hl=en&authuser=0&gl=US",
+    detailsUrl: "https://github.com/everurstruly/ai-chat-clarity",
   },
   {
     cover: "/highlights/project-game-controller.jpg",
-    id: "game",
+    id: "browser-game",
     date: "2022",
     title: "Word Guessing Puzzle Game",
     description:
@@ -49,20 +48,8 @@ const highlights = [
     tech: ["Javascript", "DOM Manipulation", "Responsive CSS", "HTML5"],
     tags: ["Front End"],
     demoUrl: "https://everurstruly.github.io/The-New-York-Times-Wordle-Clone/",
-    detailsUrl:
-      "https://github.com/everurstruly/The-New-York-Times-Wordle-Clone",
+    detailsUrl: "https://github.com/everurstruly/The-New-York-Times-Wordle-Clone",
   },
-  // {
-  //   id: "static",
-  //   date: "2025",
-  //   title: "Brochure/Marketing Website",
-  //   description:
-  //     "A static website showcasing the features and benefits of a business/person product or service.",
-  //   tech: ["Astro", "React", "Nest.js"],
-  //   tags: ["Front End"],
-  //   demoUrl: "https://agencylikeportfolio.netlify.app/",
-  //   detailsUrl: "github.com/everurstruly",
-  // },
 ];
 
 const tints = ["blue", "green", "red", "yellow", "beige"];
@@ -72,9 +59,7 @@ const tints = ["blue", "green", "red", "yellow", "beige"];
   <header
     class="mb-8 lg:mb-10 flex flex-wrap items-center gap-y-2 gap-x-4 justify-between"
   >
-    <h2
-      class="text-4xl font-semibold uppercase text-zinc-800 dark:text-zinc-100"
-    >
+    <h2 class="text-4xl font-semibold uppercase text-zinc-800 dark:text-zinc-100">
       Featured Projects
     </h2>
 
@@ -98,9 +83,7 @@ const tints = ["blue", "green", "red", "yellow", "beige"];
               <div class="tinted-image size-full bg-zinc-100">
                 <img
                   src={
-                    project.cover
-                      ? project.cover
-                      : `/me/headshot-professional.jpg`
+                    project.cover ? project.cover : `/me/headshot-professional.jpg`
                   }
                   alt={`${project.title}`}
                   class="w-full h-full object-scale-down"
