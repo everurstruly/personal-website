@@ -181,7 +181,7 @@ const props = Astro.props;
     createContainers: true,
     hideOverflow: false,
     timing: {
-      duration: 1500,
+      duration: 1200,
       iterations: 1,
     },
     glitchTimeSpan: {
@@ -312,7 +312,9 @@ const props = Astro.props;
     }
 
     // initial gentle glitch on load (ghost/tint visible only for the glitch)
-    startGlitchCycle(jumpscareGlitchOptions);
+    setTimeout(() => {
+      startGlitchCycle(jumpscareGlitchOptions);
+    }, 4000);
 
     jumpscareTriggersEl.forEach((trigger) => {
       trigger.addEventListener("mouseenter", () => {

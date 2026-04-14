@@ -1,26 +1,34 @@
 ---
-import { ExternalLink, BriefcaseBusiness, Building2, Frame } from "lucide-astro";
+import { BriefcaseBusiness, Building2, Frame, Download } from "lucide-astro";
 
 const experiences = [
   {
     icon: BriefcaseBusiness,
     date: ["2022", "Till Date"],
-    role: "Web Developer",
+    role: "Full Stack Engineer",
     business: "Freelance",
     contribution:
-      "Worked across various domains including SaaS, Gamification, Fintech, Browser Automation, Custom Management and Editorial CMS. Building full-stack web applications with heavy focus on user experience and client expectations through effective planning and resourceful solutions.",
+      "Built and delivered full-stack web applications across multiple domains using Next.js and Nest.js, resolving frontend and API issues, implementing cross-platform integrations, and managing development from requirements to production with AI-assisted QA.",
     attachments: [{ label: "Screenshot", url: "" }],
-    tech: ["Typescript", "Next.js", "Nest.js", "Tailwind CSS", "Git"],
+    tech: [
+      "Typescript",
+      "Next.js",
+      "Nest.js",
+      "Tailwind CSS",
+      "Firebase",
+      "Google Cloud",
+      "Git",
+    ],
   },
   {
     icon: Building2,
-    date: ["Feb 2025", "Till Date"],
+    date: ["Feb 2025", "Aug 2025"],
     role: "Full Stack Developer",
     business: "X3Lab",
     contribution:
-      "Conducted code reviews, feasibility studies, and software design to enhance project quality. Improved API structure and implemented new functional integrations within an existing Node.js codebase. Converted Figma designs into fully responsive web interfaces using Next.js and Tailwind CSS.",
+      "Engineered full-stack web applications with React/Next.js and Node.js, converting Figma designs into responsive interfaces, improving APIs and integrations, and contributing to code quality, system design, and cross-functional product development.",
     attachments: [{ label: "Screenshot", url: "" }],
-    tech: ["React.js", "Node.js", "Tailwind CSS", "Nest.js", "Git"],
+    tech: ["React.js", "Node.js", "Tailwind CSS", "Git"],
   },
   {
     icon: Frame,
@@ -28,7 +36,7 @@ const experiences = [
     role: "Front End Developer",
     business: "Studio Doresh",
     contribution:
-      "Translated UI/UX designs into functional, accessible, and responsive components while developing and maintaining dynamic web applications using Vanilla JavaScript and React.js. Integrated APIs, optimized performance, and collaborated under the mentorship of a former developer turned UI/Product Designer.",
+      "Delivered responsive, accessible web interfaces by translating Figma designs into production-ready components using mobile-first CSS (Flexbox/Grid) and JavaScript, while collaborating in an SDLC workflow with version control and iterative feedback.",
     attachments: [{ label: "Screenshot", url: "" }],
     tech: ["Mobile First CSS", "DOM Javascript", "Bootstrap", "Figma", "Git"],
   },
@@ -45,12 +53,12 @@ const experiences = [
 
     <a
       href="https://github.com/everurstruly?tab=repositories"
-      class="px-0 flex gap-x-1 text-sm mt-4 hover:underline underline-offset-2 mastermind_jumpscare text-blue-600"
+      class="px-0 flex items-center gap-x-1.5 text-sm mt-4 hover:underline underline-offset-2 mastermind_jumpscare text-blue-600 leading-none"
       target="_blank"
       rel="noopener noreferrer"
     >
-      {`Download Resume (CV)`}
-      <ExternalLink class="size-4 stroke-current" />
+      {`Download My Full Resume (CV)`}
+      <Download class="size-4 stroke-current" />
     </a>
   </header>
 
@@ -61,13 +69,13 @@ const experiences = [
           class={`relative w-full lg:max-w-3xl grow timeline-shell timeline-black`}
         >
           <div class="lg:flex items-start">
-            <div class="hidden lg:flex shrink-0 lg:w-[var(--timeline-col-width)] lg:pe-[var(--timeline-col-padding-end)] lg:mt-3">
+            <div class="hidden lg:flex shrink-0 lg:w-[var(--timeline-col-width)] lg:pe-[var(--timeline-col-padding-end)] mt-2.5">
               <span class="timeline-date">
                 {work.date?.[0]} — {work.date?.[1]}
               </span>
             </div>
 
-            <div class="bg-background lg:-ms-4 size-8 lg:size-10__ border shrink-0 mb-4 lg:mb-0 lg:mt-0 grid place-content-center lg:z-20 lg:relative border-foreground ">
+            <div class="bg-background lg:-ms-4 size-8 lg:size-10__ border shrink-0 mb-4 lg:mb-0 lg:mt-0 grid place-content-center lg:z-20 lg:relative">
               <work.icon className="size-4" />
             </div>
 
@@ -82,11 +90,52 @@ const experiences = [
                 </p>
               </header>
 
-              <p class="text-sm lg:text-base text-zinc-900 dark:text-zinc-400">
-                {work.contribution}{" "}
-                <span class="font-semibold">Technologies used:</span>{" "}
-                {work.tech.join(", ")}
-              </p>
+              {typeof work.contribution === "string" && (
+                <p class="text-sm lg:text-base text-zinc-700 dark:text-zinc-400 leading-relaxed">
+                  {work.contribution}{" "}
+                  <span class="text-zinc-800">Technologies used:</span>{" "}
+                  {work.tech.map((item, index, arr) => {
+                    const prefix = index === 0 ? "" : ", ";
+                    const sufix = index === arr.length - 1 ? " and more." : "";
+                    return (
+                      <>
+                        {prefix}
+                        {item}
+                        {sufix}
+                      </>
+                    );
+                  })}
+                </p>
+              )}
+
+              {Array.isArray(work.contribution) && (
+                <div class="text-sm lg:text-base text-zinc-700 dark:text-zinc-400">
+                  <ul class="flex flex-col gap-y-2 m-0">
+                    {work.contribution.map((item) => (
+                      <li class="flex gap-x-2 leading-tight">
+                        <span class="text-zinc-600">•</span>
+                        {item}
+                      </li>
+                    ))}
+                    <li class="flex gap-x-2 opacity-80">
+                      <span>#</span>
+                      <p>
+                        {work.tech.map((item, index, arr) => {
+                          const prefix = index === 0 ? "" : ", ";
+                          const sufix = index === arr.length - 1 ? "." : "";
+                          return (
+                            <>
+                              {prefix}
+                              {item}
+                              {sufix}
+                            </>
+                          );
+                        })}
+                      </p>
+                    </li>
+                  </ul>
+                </div>
+              )}
             </div>
           </div>
         </article>
@@ -186,7 +235,7 @@ const experiences = [
     .timeline-shell {
       --border-width: 1px; /* thickness of the dashed line */
       --border-height: 1px; /* thickness of the dashed line */
-      --timeline-col-padding-end: 6rem;
+      --timeline-col-padding-end: 5rem;
       --timeline-col-width: calc(8rem + var(--timeline-col-padding-end));
       --transition-duration: 700ms;
       --border-gap: calc(
